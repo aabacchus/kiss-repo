@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+make
+install -Dm755 -t "$1"/usr/bin amfora
+install -Dm644 -t "$1"/usr/share/applications amfora.desktop
