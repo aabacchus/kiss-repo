@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+mkdir -p $1/usr/share/fonts/TTF \
+	 $1/usr/share/fonts/OTF
+cp *.ttf $1/usr/share/fonts/TTF/
+cp *.otf $1/usr/share/fonts/OTF/
