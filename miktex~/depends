@@ -1,0 +1,17 @@
+cmake
+bzip2
+cairo
+expat
+fontconfig
+fribidi
+gmp
+harfbuzz-icu
+icu
+mpfr
+libressl
+pixman
+libpng
+poppler
+popt
+potrace
+zziplib
