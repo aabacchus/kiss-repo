@@ -13,16 +13,16 @@
 # $ echo "trusted-key $keyid" >> ~/.gnupg/gpg.conf
 
 for sig in *.txt; do
-	keyid=$(
-	gpg --import \
-	    --keyid-format long \
-	    "$sig" 2>&1 \
-	| awk '/^gpg: key / {print substr($3, 1, length($3)-1)}')
-	gpg --command-fd 0 \
-	    --quiet \
-	    --expert \
-	    --edit-key "$keyid" \
-	    trust << EOF >/dev/null 2>&1
+    keyid=$(
+    gpg --import \
+        --keyid-format long \
+        "$sig" 2>&1 \
+    | awk '/^gpg: key / {print substr($3, 1, length($3)-1)}')
+    gpg --command-fd 0 \
+        --quiet \
+        --expert \
+        --edit-key "$keyid" \
+        trust << EOF
 5
 y
 q
