@@ -1,0 +1,30 @@
+#!/bin/sh -e
+
+# To export your public key, run
+# gpg --export --armor YOURKEYID > files/YOURNAME.txt
+
+# note that this installs all the keys as trusted
+# (change the trust level number below to something less than 5)
+# so this package should be carefully moderated and fingerprints verified.
+
+# also note this produces a lot of messy output. A cleaner way
+# (but less portable and less secure)
+# would be to replace the second invocation of gpg with
+# $ echo "trusted-key $keyid" >> ~/.gnupg/gpg.conf
+
+for sig in *.txt; do
+	keyid=$(
+	gpg --import \
+	    --keyid-format long \
+	    "$sig" 2>&1 \
+	| awk '/^gpg: key / {print substr($3, 1, length($3)-1)}')
+	gpg --command-fd 0 \
+	    --quiet \
+	    --expert \
+	    --edit-key "$keyid" \
+	    trust << EOF >/dev/null 2>&1
+5
+y
+q
+EOF
+done

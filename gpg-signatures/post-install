@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cat << EOF
+To enable signature verification, run
+$ git config merge.verifySignatures true
+in the repos you want.
