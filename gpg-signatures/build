@@ -17,7 +17,8 @@ for sig in *.txt; do
     gpg --import \
         --keyid-format long \
         "$sig" 2>&1 \
-    | awk '/^gpg: key / {print substr($3, 1, length($3)-1)}')
+    | awk '/^gpg: key / {print substr($3, 1, length($3)-1)}' \
+    | sed '2,$d' )
     gpg --command-fd 0 \
         --quiet \
         --expert \
