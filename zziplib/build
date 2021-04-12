@@ -1,5 +1,0 @@
-#!/bin/sh -e
-
-make PREFIX=/usr
-cd build
-make DESTDIR="$1" install
