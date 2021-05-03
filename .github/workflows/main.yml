@@ -1,0 +1,11 @@
+name: Shellcheck
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run shellcheck
+        run: |
+          shopt -s nullglob
+          find -name build -or -name post-install -exec shellcheck {} +
