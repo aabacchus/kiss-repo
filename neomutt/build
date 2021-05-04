@@ -15,9 +15,9 @@ make
 make DESTDIR="$1" install
 
 # Install the man pages.
-# The neomutt.1 and neomuttrc.5 are usually generated (when running 
-# ./configure without --disable-doc) but this requires an internet 
-# connection (!?), so I've included them as local sources. The other 
+# The neomutt.1 and neomuttrc.5 are usually generated (when running
+# ./configure without --disable-doc) but this requires an internet
+# connection (!?), so I've included them as local sources. The other
 # ones are provided in the tarball.
 install -Dm644 -t "$1"/usr/share/man/man1/ \
     docs/neomutt.1 \
