@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+./autogen.sh \
+    --prefix=/usr \
+    --with-zlib
+
+make
+make DESTDIR="$1" install

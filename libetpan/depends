@@ -1,0 +1,9 @@
+autoconf make
+automake make
+curl
+cyrus-sasl
+expat
+libressl
+libtool  make
+pkgconf  make
+zlib
