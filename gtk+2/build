@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --enable-debug=no \
+    --disable-gtk-doc
+
+make
+make DESTDIR="$1" install
+rm -fr "$1/usr/share/gtk-2.0/demo"
+rm -f  "$1/usr/bin/gtk-demo"
