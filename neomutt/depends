@@ -1,4 +1,9 @@
 cyrus-sasl
+gdbm
 gnutls
+gpgme
+libassuan
+libgpg-error
 ncurses
 zlib
+zstd

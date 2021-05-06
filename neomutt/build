@@ -6,10 +6,13 @@
     --ssl \
     --sasl \
     --gnutls \
+    --gpgme \
+    --gdbm \
     --disable-nls \
     --disable-idn \
     --disable-doc \
-    --zlib
+    --zlib \
+    --zstd
 
 make
 make DESTDIR="$1" install
