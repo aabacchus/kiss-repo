@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+# see the claws-mail package. I've had some problems with encryption there,
+# so this is a suspect.
+
+./configure \
+    --prefix=/usr \
+#    --disable-nls
+#    --disable-gpg-test
+#    --disable-gpgconf-test
+
+make
+make DESTDIR="$1" install
