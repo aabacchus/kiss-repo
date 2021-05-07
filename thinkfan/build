@@ -1,0 +1,20 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+# This build doesn't use the YAML config file,
+# because I don't want to install a yaml library.
+# However, the old config syntax is now deprecated.
+cmake -B build \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DDISABLE_SYSLOG=ON \
+    -DUSE_YAML=OFF
+
+cmake --build   build
+cmake --install build
+
+install -Dm755 src/thinkfan.conf.legacy.5    "$1/usr/share/man/man5/thinkfan.conf.legacy.5"
+install -Dm755 thinkfan.conf                 "$1/etc/thinkfan.conf"
+install -Dm755 thinkfan.run                  "$1/etc/sv/thinkfan/run"
+ln -s /run/runit/supervise.thinkfan          "$1/etc/sv/thinkfan/supervise"

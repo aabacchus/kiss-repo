@@ -1,0 +1,15 @@
+#!/bin/sh
+
+cat << EOF
+For this program to work, you'll need the thinkpad_acpi kernel module,
+loaded with the option 'fan_control=1':
+Either add 
+
+    thinkpad_acpi.fan_control=1
+
+to your linux commandline (if the module is built-in), or add
+
+    options thinkpad_acpi fan_control=1
+
+to your modprobe stuff.
+EOF

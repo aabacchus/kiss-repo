@@ -1,0 +1,2 @@
+#!/bin/sh
+exec thinkfan -nq 2>&1
