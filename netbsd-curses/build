@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+make \
+    LDFLAGS="$LDFLAGS -static" \
+    DESTDIR="$1" \
+    PREFIX=/usr \
+    all-static \
+    install-static
+
+# ncurses-compatible script
+install -Dm755 ncurses5-config "$1/usr/bin/ncurses5-config"
+
+# Install the license
+install -Dm755 COPYING "$1/usr/share/licenses/netbsd-curses/COPYING"
