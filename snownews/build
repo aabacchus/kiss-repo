@@ -7,10 +7,20 @@
 # remove gettext make dep by not building other language support
 sed -i '/^include po\/Module.mk$/d' Makefile
 
-make
+
+# The _XOPEN_SOURCE definition is to workaround a bug in ncurses
+# where _GNU_SOURCE should enable WIDECHAR support as well as
+# _XOPEN_SOURCE, but only _XOPEN_SOURCE is checked.
+# In glibc, defining _GNU_SOURCE causes _XOPEN_SOURCE to be defined,
+# but not in musl.
+# (An even better method than this CFLAG is to use `pkgconf --libs ncurses`,
+# but I want to keep the dependencies down. However, to build with
+# netbsd-curses instead of ncurses, just remove this CFLAG and
+# make sure you've installed pkgconf. :)
+make CFLAGS+=-D_XOPEN_SOURCE=600
 make DESTDIR="$1" install
 
-# remove manpages in extra languages
+# Remove manpages in extra languages
 for lang in ru nl it fr de; do
     rm -fr "$1/usr/share/man/$lang";
 done

@@ -2,3 +2,5 @@ curl
 libressl
 libxml2
 ncurses
+# or netbsd-curses :)
+#pkgconf make
