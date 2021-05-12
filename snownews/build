@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --disable-nls
+
+# remove gettext make dep by not building other language support
+sed -i '/^include po\/Module.mk$/d' Makefile
+
+make
+make DESTDIR="$1" install
+
+# remove manpages in extra languages
+for lang in ru nl it fr de; do
+    rm -fr "$1/usr/share/man/$lang";
+done
