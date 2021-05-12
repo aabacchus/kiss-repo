@@ -1,2 +1,4 @@
+gnupg1 make
+#gnupg2 (either or)
 libassuan
 libgpg-error
