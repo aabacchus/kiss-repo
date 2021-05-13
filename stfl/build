@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+# if we have pkgconf, use it to find the correct ncurses libs
+if command -v pkg-config >/dev/null; then
+    curses_libs=$(pkg-config --libs ncurses)
+else
+    # this works with the ncurses package in repo-main
+    curses_libs="-lncurses"
+fi
+
+sed -i 's/ncursesw\/ncurses.h/ncurses.h/' stfl_internals.h
+sed -i "s/-lncursesw/$curses_libs/" \
+    stfl.pc.in \
+    ruby/Makefile.snippet \
+    python/Makefile.snippet \
+    perl5/Makefile.PL \
+    Makefile
+
+make prefix=/usr DESTDIR="$1" install
