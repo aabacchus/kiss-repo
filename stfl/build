@@ -17,3 +17,6 @@ sed -i "s/-lncursesw/$curses_libs/" \
     Makefile
 
 make prefix=/usr DESTDIR="$1" install
+
+# newsboat wants this to exist
+ln -s libstfl.so.0.24 "$1/usr/lib/libstfl.so.0"
