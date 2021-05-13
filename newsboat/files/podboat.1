@@ -1,0 +1,313 @@
+'\" t
+.\"     Title: podboat
+.\"    Author: Alexander Batischev
+.\" Generator: Asciidoctor 2.0.15
+.\"      Date: 2021-03-21
+.\"    Manual: \ \&
+.\"    Source: \ \&
+.\"  Language: English
+.\"
+.TH "PODBOAT" "1" "2021-03-21" "\ \&" "\ \&"
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.ss \n[.ss] 0
+.nh
+.ad l
+.de URL
+\fI\\$2\fP <\\$1>\\$3
+..
+.als MTO URL
+.if \n[.g] \{\
+.  mso www.tmac
+.  am URL
+.    ad l
+.  .
+.  am MTO
+.    ad l
+.  .
+.  LINKSTYLE blue R < >
+.\}
+.SH "NAME"
+podboat \- a podcast download manager for text terminals
+.SH "SYNOPSIS"
+.sp
+\fBpodboat\fP [\-C configfile] [\-q queuefile] [\-a] [\-h]
+.SH "DESCRIPTION"
+.sp
+\fIPodboat\fP is a podcast manager for text terminals. It is a helper program to
+\fINewsboat\fP which queues podcast downloads into a file. These queued downloads
+can then be download with \fIPodboat\fP.
+.SH "OPTIONS"
+.sp
+\-h, \-\-help
+.RS 4
+Display help
+.RE
+.sp
+\-C configfile, \-\-config\-file=configfile
+.RS 4
+Use an alternative configuration file
+.RE
+.sp
+\-q queuefile, \-\-queue\-file=queuefile
+.RS 4
+Use an alternative queue file
+.RE
+.sp
+\-a, \-\-autodownload
+.RS 4
+Start automatic download of all queued files on startup
+.RE
+.sp
+\-l loglevel, \-\-log\-level=loglevel
+.RS 4
+Generate a logfile with a certain loglevel. Valid loglevels are 1 to 6. An
+actual logfile will only be written when you provide a logfile name.
+.RE
+.sp
+\-d logfile, \-\-log\-file=logfile
+.RS 4
+Use this logfile as output when logging debug messages. Please note that this
+only works when providing a loglevel.
+.RE
+.SH "PODCAST SUPPORT"
+.sp
+A podcast is a media file distributed over the internet using syndication feeds
+such as RSS, for later playback on portable players or computers.
+Newsboat supports downloading, saving and streaming podcasts, though an external
+media player is needed for playback. This support differs a bit from other
+podcast aggregators or "podcatchers" in how it is done.
+.sp
+Podcast content is transported in RSS feeds via special tags called
+"enclosures". Newsboat recognizes these enclosures and stores the relevant
+information for every podcast item it finds in an RSS feed. Since version 2.0,
+it also recognizes and handles the Yahoo Media RSS extensions.
+.SH "MANAGING AUDIO FILES WITH PODBOAT"
+.sp
+What the user can do is to add the podcast download URL to a download queue.
+Alternatively, Newsboat can be configured to automatically do that. This
+queue is stored in the \fIqueue\fP file next to the \fIcache.db\fP file.
+.sp
+The user can then use the download manager \f(CRpodboat\fP to download these files
+to a directory on the local filesystem. Podboat comes with the Newsboat
+package, and features a look and feel very close to the one of Newsboat. It
+also shares the same configuration file.
+.sp
+Podcasts that have been downloaded but haven\(cqt been played yet remain in the
+queue but are marked as downloaded. You can remove them by purging them from
+the queue with the "P" key. After you\(cqve played a file and close Podboat, it
+will be removed from the queue. The downloaded file remains on the
+filesystem unless "delete\-played\-files" is enabled.
+.sp
+A common "use case" is to configure Newsboat to automatically enqueue newly
+found podcast download URLs. Then, the user reloads the podcast RSS feeds in
+Newsboat, and after that, uses Podboat to view the current queue, and
+either selectively download certain files or automatically download them all
+together by pressing "a" within Podboat.
+.SH "CONFIGURATION COMMANDS"
+.sp
+\fIdelete\-played\-files\fP (parameters: [yes/no]; default value: \fIno\fP)
+.RS 4
+If set to \f(CRyes\fP, Podboat will delete files when their corresponding queue entry is removed (this includes "finished" and "deleted" entries as well). (example: delete\-played\-files yes)
+.RE
+.sp
+\fIdownload\-path\fP (parameters: <path>; default value: \fI~/\fP)
+.RS 4
+Specifies the directory where Podboat shall download the files to. Optionally, placeholders can be used to place downloads in a directory structure. See "Format Strings" section of Newsboat manual for details on available formats. This setting is applied at enqueueing time; changing it won\(cqt affect download paths of the podcasts that were already added to the queue. (example: download\-path "~/Downloads/%h/%n")
+.RE
+.sp
+\fIdownload\-filename\-format\fP (parameters: <string>; default value: \fI"%?u?%u&%Y\-%b\-%d\-%H%M%S.unknown?"\fP)
+.RS 4
+Specifies how Podboat would name the files it downloads (see also \f(CRdownload\-path\fP). See "Format Strings" section of Newsboat manual for details on available formats. (example: download\-filename\-format "%F\-%t.%e")
+.RE
+.sp
+\fImax\-downloads\fP (parameters: <number>; default value: \fI1\fP)
+.RS 4
+Specifies the maximum number of parallel downloads when automatic download is enabled. (example: max\-downloads 3)
+.RE
+.sp
+\fIplayer\fP (parameters: <player command>; default value: \fI""\fP)
+.RS 4
+Specifies the player that shall be used for playback of downloaded files. (example: player "mp3blaster")
+.RE
+.sp
+\fIpodlist\-format\fP (parameters: <format>; default value: \fI"%4i [%6dMB/%6tMB] [%5p %%] [%12K] %\-20S %u \(-> %F"\fP)
+.RS 4
+This variable defines the format of entries in Podboat\(cqs download list. See the respective section in the documentation for more information on format strings. (example: podlist\-format "%i %u %\-20S %F")
+.RE
+.SH "FILES"
+.sp
+By default, Newsboat stores all the files in a traditional Unix fashion, i.e.
+in a "dotdir" located at \fI~/.newsboat\fP. However, it also supports a modern
+way,
+.URL "https://standards.freedesktop.org/basedir\-spec/basedir\-spec\-latest.html" "XDG Base Directory Specification" ","
+which splits the files between the following locations:
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+\fI$XDG_CONFIG_HOME/newsboat/\fP
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+\fI$XDG_DATA_HOME/newsboat/\fP
+.RE
+.sp
+If the \f(CRXDG_CONFIG_HOME\fP environment variable is not set, Newsboat behaves as
+if it was set to \fI~/.config\fP. Similarly, \f(CRXDG_DATA_HOME\fP defaults to
+\fI~/.local/share\fP.
+.sp
+If the XDG config directory exists, Newsboat will use XDG directories, creating
+the data directory if necessary. Otherwise, it will default to \fI~/.newsboat\fP.
+.sp
+If you\(cqre currently using \fI~/.newsboat/\fP but wish to migrate to XDG
+directories, you should move the files as follows:
+.sp
+\fIconfig\fP, \fIurls\fP
+.RS 4
+to \fI$XDG_CONFIG_HOME/newsboat/\fP
+.RE
+.sp
+\fIcache.db\fP, \fIhistory.search\fP, \fIhistory.cmdline\fP, \fIqueue\fP
+.RS 4
+to \fI$XDG_DATA_HOME/newsboat/\fP
+.RE
+.sp
+Newsboat and Podboat also create "lock files". These prevent you from starting
+two instances of the same program, and thus from corrupting your data. Newsboat
+and Podboat remove these files when you quit the program, so there is no need
+to copy them anywhere — just be aware of them in case you write scripts that
+work with \fIcache.db\fP or \fIqueue\fP. By default, lock files are located as follows:
+.TS
+allbox tab(:);
+lt lt lt.
+T{
+.sp
+
+T}:T{
+.sp
+dotdir
+T}:T{
+.sp
+XDG
+T}
+T{
+.sp
+Newsboat
+T}:T{
+.sp
+\fI~/.newsboat/cache.db.lock\fP
+T}:T{
+.sp
+\fI$XDG_DATA_HOME/newsboat/cache.db.lock\fP
+T}
+T{
+.sp
+Podboat
+T}:T{
+.sp
+\fI~/.newsboat/pb\-lock.pid\fP
+T}:T{
+.sp
+\fI$XDG_DATA_HOME/newsboat/.lock\fP
+T}
+.TE
+.sp
+.sp
+Newsboat places the lock file next to the cache file, so if you specify
+cache\-file setting or pass \f(CR\-\-cache\-file\fP command\-line argument,
+the path to the lock file will change too. Podboat, on the other hand, always
+places its lock file as shown above.
+.sp
+dotfiles
+.RS 4
+\fI~/.newsboat/config\fP
+.sp
+\fI~/.newsboat/queue\fP
+.RE
+.sp
+XDG
+.RS 4
+\fI$XDG_CONFIG_HOME/newsboat/config\fP
+.sp
+\fI$XDG_DATA_HOME/newsboat/queue\fP
+.sp
+Note: if the \f(CRXDG_CONFIG_HOME\fP environment variable is not set, Podboat behaves as
+if it was set to \fI~/.config\fP. Similarly, \f(CRXDG_DATA_HOME\fP defaults to
+\fI~/.local/share\fP.
+.RE
+.SH "ENVIRONMENT"
+.sp
+\f(CRBROWSER\fP
+.RS 4
+Tells Newsboat what browser to use if there is no \f(CRbrowser\fP
+setting in the config file. If this variable doesn\(cqt exist, a default
+of \f(CRlynx(1)\fP will be used.
+.RE
+.sp
+\f(CRCURL_CA_BUNDLE\fP
+.RS 4
+Tells Newsboat to use the specified certificate file to verify the peer.
+The file may contain multiple certificates. The certificate(s) must be
+in PEM format.
+.sp
+This option is useful if your libcurl is built without useful
+certificate information, and you can\(cqt rebuild the library yourself.
+.RE
+.sp
+\f(CREDITOR\fP
+.RS 4
+Tells Newsboat what fallback editor to use when editing the \fIurls\fP file
+via the \f(CRedit\-urls\fP operation and no \f(CRVISUAL\fP
+environment variable is set. If this variable doesn\(cqt exist either, a
+default of \f(CRvi(1)\fP will be used.
+.RE
+.sp
+\f(CRPAGER\fP
+.RS 4
+Tells Newsboat what pager to use if the \f(CRpager\fP setting in
+the config file is explicitly set to an empty string.
+.RE
+.sp
+\f(CRTMPDIR\fP
+.RS 4
+Tells Newsboat to use the specified directory for storing temporary files.
+If this variable doesn\(cqt exist, a default of \fI/tmp\fP will be used.
+.RE
+.sp
+\f(CRVISUAL\fP
+.RS 4
+Tells Newsboat what editor to use when editing the \fIurls\fP file via the
+\f(CRedit\-urls\fP operation. If this variable doesn\(cqt exist,
+the \f(CREDITOR\fP environment variable will be used.
+.RE
+.sp
+\f(CRXDG_CONFIG_HOME\fP
+.RS 4
+Tells Newsboat which base directory to use for the configuration files.
+See also the section on files for more information.
+.RE
+.sp
+\f(CRXDG_DATA_HOME\fP
+.RS 4
+Tells Newsboat which base directory to use for the data files. See also
+the section on files for more information.
+.RE
+.SH "SEE ALSO"
+.sp
+newsboat(1)
+.SH "AUTHOR"
+.sp
+Alexander Batischev

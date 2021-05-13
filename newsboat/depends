@@ -1,0 +1,10 @@
+curl
+gcc
+json-c
+libressl
+libxml2
+ncurses
+pkgconf make
+rust make
+sqlite
+stfl
