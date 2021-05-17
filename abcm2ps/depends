@@ -1,0 +1,5 @@
+cairo
+fontconfig
+freetype-harfbuzz
+glib
+pango

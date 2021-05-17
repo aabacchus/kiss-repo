@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+# NOTE: the manpage is provided locally (requires rst2man from
+# python's docutils to generate)
+
+./configure \
+    --prefix=/usr
+
+make
+make DESTDIR="$1" install

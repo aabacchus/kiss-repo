@@ -1,0 +1,858 @@
+.\" Man page generated from reStructuredText.
+.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.TH "ABCM2PS"  "" "" ""
+.SH NAME
+abcm2ps \- translate ABC music notation to PostScript or SVG
+.\" Process this file with rst2man from python-docutils
+.\" to generate a nroff manual page
+.
+.SH SYNOPSIS
+.INDENT 0.0
+.INDENT 3.5
+\fBabcm2ps\fP [global_options] ABC_file [file_options] ...
+.UNINDENT
+.UNINDENT
+.SH DESCRIPTION
+.sp
+\fBabcm2ps\fP translates tunes written in
+the ABC music notation format to customary sheet music scores in
+PostScript or SVG. It is based on \fBabc2ps\fP 1.2.5 and was
+developed mainly to print Baroque organ scores that have
+independent voices played on multiple keyboards and a
+pedal\-board. The program has since been extended to support
+various other notation conventions in use for sheet music.
+.sp
+Options given immediately after the command name apply to
+the run as a whole; options given after an ABC file name apply
+to that file.
+.sp
+Formatting parameters can also be set in "format files" and
+in the ABC files themselves.
+.SH OPTIONS
+.sp
+The list of the command line options may be known running:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+abcm2ps \-h
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The options may be grouped when they have no argument, but the
+last one (ex: \fB\-lnGI20\fP).
+.sp
+The options may be disabled when starting with \(aq+\(aq or ending with \(aq\-\(aq
+(ex: \fB+MT1\fP is the same as \fB\-MT1\-\fP).
+.sp
+The general output format is the last found in the command line.
+It may be:
+.INDENT 0.0
+.TP
+.B  \-E
+for Encapsulated PostScript, one file per tune
+.TP
+.B  \-g
+for SVG, one file per tune
+.TP
+.B  \-v
+for SVG, one file per page
+.TP
+.B  \-X
+for XHTML+SVG
+.TP
+.B  \-z
+for (X)HTML+SVG with (X)HTML+ABC input
+.UNINDENT
+.sp
+(see below for more information)
+.SS List of the options
+.INDENT 0.0
+.TP
+.B \-
+Read the abc file from stdin.
+.TP
+.B \-\-<format> <value>
+Set the <format> parameter to <value>.
+.sp
+This has the same effect as a format parameter
+directly in the source file.
+.UNINDENT
+.INDENT 0.0
+.TP
+.BI \-a \ <float>
+Maximal horizontal compression when staff breaks are
+chosen automatically. Must be a float between 0 and 1.
+.sp
+This correspond to the \fB%%maxshrink\fP
+formatting parameter (default: 0.65).
+.TP
+.B  \-A
+This option inserts reference elements in the PostScript
+or SVG output.
+.TP
+.BI \-B \ <int>\fR,\fB \ +B
+Try to typeset <int> bars on each staff line.
+.sp
+This corresponds to the \fB%%barsperstaff\fP formatting parameter.
+.TP
+.BI \-b \ <int>
+Start measure numbering at <int>.
+.sp
+This corresponds to the \fB%%measurefirst\fP formatting parameter.
+.TP
+.B  \-c\fP,\fB  +c
+The continuation symbol is implicitly appended to each
+music line. This amounts to automatic line breaking.
+.sp
+This corresponds to the \fB%%continueall\fP formatting parameter.
+.TP
+.BI \-D \ <dir>
+Search the format files in the directory <dir>.
+.TP
+.BI \-d \ <unit>
+Set the vertical interstaff space to <unit>.
+.sp
+This corresponds to the \fB%%staffsep\fP formatting parameter
+(default: 46pt).
+.TP
+.B  \-E
+Produce EPS output instead of simple PS.
+.sp
+In this mode, each tune goes to a different file which
+name is "<name>nnn.eps" or "<title>.eps" (see option \(aq\-O\(aq)
+.INDENT 7.0
+.INDENT 3.5
+.INDENT 0.0
+.IP \(bu 2
+\(aqnnn\(aq is a sequence number incremented at each tune
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.sp
+Output to stdout is forbidden.
+.sp
+EPS files are normally embedded into Postscript documents,
+but they may be a way to generate graphical images. For
+example, using GhostScript:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+abcm2ps voices \-Ee7
+gs \-sDEVICE=pngmono \-r80 \-g590x174 \e
+   \-dBATCH \-dNOPAUSE \e
+   \-sOutputFile=quitolis.png Out001.eps
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+(the values for \-g are the values of the bounding box in
+the .eps, multiplied by (80 / 72), where 80 is the value
+for \-r, and 72 is the default resolution)
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-e [ <tune index list> ] [ <regular expression> ]
+Select which tunes from an ABC file to print.
+.sp
+<tune index list> is either a comma\-separated list of tune
+numbers (as per the \fBX:\fP header), or a regular expression
+which will be matched against the tune headers as a whole.
+The \fB\-e\fP option must occur after an ABC file
+name and applies to that file.
+.sp
+Ranges of tune numbers may be specified like \fB<t1>\-<t2>\fP;
+<t2> may be omitted which means
+"all remaining tunes until the end of file". Note that
+filtering may cause problems, e.g., with global (non\-tune)
+definitions in the ABC file.
+.sp
+This corresponds to the \fB%%select\fP formatting parameter.
+.UNINDENT
+.INDENT 0.0
+.TP
+.BI \-F \ <file>\fR,\fB \ +F
+Read the format (or PostScript) file <file>.
+.sp
+When omitted, the default type of a format file is \(aq.fmt\(aq.
+.sp
+In the form \(aq+F\(aq, the default format file (\(aqdefault.fmt\(aq) is not
+read.
+.TP
+.B  \-f
+Enable flat beams (useful for bagpipe tunes).
+.sp
+This corresponds to the \fB%%flatbeams\fP formatting parameter.
+.TP
+.B  \-G\fP,\fB  +G
+Omit slurs on grace notes.
+.sp
+This corresponds to the \fB%%graceslurs\fP formatting parameter.
+.TP
+.B  \-g
+Produce SVG output instead of EPS.
+.sp
+In this mode each tune goes to a different file which name
+is \(aqOutnnn.svg\(aq (see option \(aq\-O\(aq).
+.sp
+If the output is stdout (option \(aq\-O\-\(aq), all the SVG images
+are output without XML header.
+.TP
+.B  \-H
+Display the current format values.
+.TP
+.B  \-h
+Quick help, equivalent to "abcm2ps" without any arguments.
+.sp
+This also shows the default settings for some parameters.
+.TP
+.BI \-I \ <unit>
+Indent the first line of the tune by <unit> (default: 0).
+.sp
+This corresponds to the \fB%%indent\fP formatting parameter.
+.TP
+.B  \-i\fP,\fB  +i
+Insert a red cercle around the errors in the PostScript output.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-j <int>[b], +j
+Output a measure number every <int> measures.
+.sp
+If <int> is 0, the measure number appears at the left of each staff.
+The trailing \fBb\fP causes a box to be drawn
+around each measure number (default: no measure numbering).
+.sp
+This corresponds to the \fB%%measurenb\fP formatting parameter.
+.UNINDENT
+.INDENT 0.0
+.TP
+.BI \-k \ <int>
+Set the size of the PostScript output buffer in Kibytes.
+.sp
+Setting this value to a higher value permits the
+generation of big tunes with \-E or \-g. The default value is 64.
+.TP
+.B  \-l\fP,\fB  +l
+Generate landscape output.
+.sp
+This corresponds to the \fB%%landscape\fP formatting parameter.
+.TP
+.B  \-M\fP,\fB  +M
+Suppress lyrics.
+.sp
+See the \fB%%writefields w\fP formatting parameter.
+.TP
+.BI \-m \ <unit>
+Set the left margin to <unit> (default: 1.8cm).
+.sp
+This corresponds to the \fB%%leftmargin\fP formatting parameter.
+.TP
+.BI \-N \ <int>\fR,\fB \ +N
+Number the pages.
+.sp
+<int> indicates the mode:
+.INDENT 7.0
+.INDENT 3.5
+.INDENT 0.0
+.TP
+.B 0
+no page numbers
+.TP
+.B 1
+at top left
+.TP
+.B 2
+at top right
+.TP
+.B 3
+at top left on even pages, top right on odd pages
+.TP
+.B 4
+at top right on even pages, top left on odd pages
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.sp
+For compatibility with previous versions, \(aq+N\(aq is the same as
+\(aq\-N0\(aq, and \(aq\-N\(aq is the same as \(aq\-N2\(aq.
+.sp
+If a header is defined ("%%header"), this option is ignored.
+.TP
+.B  \-n\fP,\fB  +n
+Include notes and history from ABC tune \fBN:\fP fields.
+.sp
+See the \fB%%writehistory N\fP formatting parameter.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-O [ <directory> ] [ <name> ], +O
+Define the output file directory and/or name.
+.sp
+The directory must end with the directory separator
+(\(aq/\(aq for unix/windows, \(aq\e\(aq for mac).
+.sp
+By default, the output file goes to the current directory
+with the name:
+.INDENT 7.0
+.INDENT 3.5
+\(aqOut.ps\(aq for PS,
+.sp
+\(aqOutnnn.eps\(aq for EPS (see option \(aq\-E\(aq),
+.sp
+\(aqOutnnn.svg\(aq for SVG (see options \(aq\-g\(aq and \(aq\-v\(aq) or
+.sp
+\(aqOut.xhtml\(aq for XHTML+SVG (see options \(aq\-X\(aq and \(aq\-z\(aq).
+.UNINDENT
+.UNINDENT
+.sp
+\(aqnnn\(aq is a sequence number.
+.sp
+When <name> is present, it is the name of the file, or it
+replaces "Out" in the file name.
+.sp
+If <name> is \(aq=\(aq, it is replaced by the name of the ABC
+source file (not for \(aq\-z\(aq).
+.sp
+If <name> is \(aq\-\(aq, the result is output to stdout (not for EPS).
+\(aq+O\(aq resets the output file directory and name to their defaults.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B  \-p
+Bagpipe format.
+.sp
+When present, format output for bagpipe regardless of key.
+.TP
+.B  \-q
+Quiet mode.
+.sp
+When present, only the errors are shown.
+.TP
+.BI \-s \ <float>
+Set the page scale factor to <float>. Note that the header
+and footer are not scaled (default: 0.75).
+.sp
+This corresponds to the \fB%%scale\fP formatting parameter.
+.TP
+.B  \-S
+Secure mode.
+.sp
+When present, file inclusion (%%format and %%EPS) and PostScript
+injection (%%beginps and %%postscript) are disabled.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-T <int> [ <voice> ], +T [ <int> [<voice> ] ]
+Activate or deactivate tablature drawing.
+.INDENT 7.0
+.IP \(bu 2
+.INDENT 2.0
+.TP
+.B <int> is the tablature number as defined in \fB%%tablature\fP\&.
+There may be only 8 different tablatures.
+.UNINDENT
+.IP \(bu 2
+.INDENT 2.0
+.TP
+.B <voice> is the voice name, full name or subname as found in V:.
+When absent, apply to all voices.
+.UNINDENT
+.UNINDENT
+.sp
+Up to 4 such commands may be defined.
+.INDENT 7.0
+.INDENT 3.5
+Ex: \(aq\-T1flute +T2\(aq
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.TP
+.B  \-V
+Show the version number.
+.TP
+.B  \-v
+Produce SVG output instead of simple PS.
+.sp
+In this mode each page goes to a different file which name
+is \(aqOutnnn.svg\(aq (see option \(aq\-O\(aq).
+.TP
+.BI \-w \ <unit>
+Adjust the right margin such that the staff width
+is <unit> (default: none).
+.sp
+This corresponds to the \fB%%staffwidth\fP formatting parameter.
+.TP
+.B  \-X
+Produce XML+SVG output instead of simple PS.
+.sp
+The default file name is \(aqOut.xhtml\(aq (see option \(aq\-O\(aq).
+.TP
+.B  \-x\fP,\fB  +x
+Include the \fBX:\fP tune number in the title.
+.sp
+This corresponds to the \fB%%writefields\fP formatting parameter.
+.TP
+.B  \-z
+Produce SVG images from ABC embedded in markup language files
+(HTML, XHTML..).
+.sp
+The source file is copied to the output file and the ABC sequences
+are converted to SVG images.
+The ABC sequences start by either \fB%abc..\fP or \fBX:..\fP
+and stop on the first markup tag (\fB<..\fP).
+.sp
+The generation creates one image per block, i.e. a music line
+or a text block. For a same rendering as the other SVG generation
+(\-g, \-v or \-X), don\(aqt forget to set the line space to null, for
+example enclosing the ABC sequences by:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+<div style="line\-height:0"> .. </div>
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+There can be only one output file.
+.sp
+Note that the default output file is \(aqOut.xhtml\(aq, so, don\(aqt
+forget to change the file type if you generate HTML (.html)
+or XML (.xml) files.
+.sp
+See "sample8.html" for a source example.
+.TP
+.B  \-0\fP,\fB  +0
+Split tunes across page breaks if necessary.
+.sp
+This corresponds to the \fB%%splittune\fP formatting parameter.
+.TP
+.B  \-1\fP,\fB  +1
+Output one tune per page.
+.sp
+This corresponds to the \fB%%oneperpage\fP formatting parameter.
+.UNINDENT
+.SH ADDITIONAL FEATURES
+.INDENT 0.0
+.TP
+.B Clefs
+Clefs can be given in \fBK:\fP and \fBV:\fP headers.
+The full syntax is:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+clef=<type><line>[+8|\-8]
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+"clef=" can be omitted when the <type> is a clef name.
+.sp
+<type> denotes the clef type. It  may be:
+.INDENT 7.0
+.IP \(bu 2
+A note pitch (\fBG\fP, \fBC\fP, or \fBF\fP)
+.INDENT 2.0
+.INDENT 3.5
+The pitch indicates which clef is meant:
+\fBG\fP is the treble clef,
+\fBC\fP the alto clef and
+\fBF\fP the bass clef.
+It also gives the name of the note that appears
+on the clef\(aqs line.
+.UNINDENT
+.UNINDENT
+.IP \(bu 2
+A clef name
+.INDENT 2.0
+.INDENT 3.5
+The available clef names are
+\fBtreble\fP (clef gives the pitch for \fBG\fP),
+\fBalto\fP or \fBtenor\fP (\fBC\fP), and
+\fBbass\fP (\fBF\fP).
+.UNINDENT
+.UNINDENT
+.IP \(bu 2
+\fBperc\fP or \fBP\fP
+.INDENT 2.0
+.INDENT 3.5
+In percussion mode, accidentals change the glyphs used for
+note heads. By default, sharp notes are drawn as "x" and
+flat notes as circled "x".
+This may be changed by redefining the PostScript functions
+\fBpshhd\fP and \fBpflhd\fP\&.
+.UNINDENT
+.UNINDENT
+.IP \(bu 2
+\fBnone\fP
+.INDENT 2.0
+.INDENT 3.5
+No clef will be displayed.
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.sp
+The <line> gives the number of
+the line within the staff that the base clef will be written
+on. The default values are 2 for the treble clef, 3 for the
+alto clef, and 4 for the tenor and bass clefs.
+.sp
+The "+8" and "\-8"
+options draw an 8 above or below the staff, respectively.
+.sp
+When no clef is specified, clef changes
+between "bass"
+and "treble" will be inserted
+automatically.
+.TP
+.B Multi\-voice typesetting
+Multiple voices may be defined within the header or the
+tune using:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+V:<name> <definition> ...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+where <name> is a word consisting of letters and digits only
+(like "violin1"). In the tune body, the
+following notes refer to this voice until
+another "V:" is encountered.
+.sp
+A <definition> can be one of:
+.INDENT 7.0
+.IP \(bu 2
+"clef="...
+.INDENT 2.0
+.INDENT 3.5
+See above
+.UNINDENT
+.UNINDENT
+.IP \(bu 2
+"name="<name> or "nm="<name>
+.INDENT 2.0
+.INDENT 3.5
+The <name> will be
+displayed at the beginning of the first staff. It can
+contain "\en" sequences
+which will force line breaks. If it contains
+whitespace it must be double\-quoted.
+.UNINDENT
+.UNINDENT
+.IP \(bu 2
+"subname="<name> or "snm="<name>
+.INDENT 2.0
+.INDENT 3.5
+The <name> will be displayed at the beginning of all staves
+except for the first. It can
+contain "\en" sequences
+which will force line breaks. If it contains
+whitespace it must be double\-quoted.
+.UNINDENT
+.UNINDENT
+.IP \(bu 2
+"merge"
+.INDENT 2.0
+.INDENT 3.5
+The voice goes on the same staff as the previous voice.
+.UNINDENT
+.UNINDENT
+.IP \(bu 2
+"up" or "down"
+.INDENT 2.0
+.INDENT 3.5
+Forces the direction of the stems for the voice.
+.UNINDENT
+.UNINDENT
+.IP \(bu 2
+"dyn=up" or "dyn=down" or "dyn=auto"
+.INDENT 2.0
+.INDENT 3.5
+Forces positioning of dynamic marks (above or
+below the staff) or reverts to automatic positioning
+(the default).
+.UNINDENT
+.UNINDENT
+.IP \(bu 2
+"gstem=up" or "gstem=down" or "gstem=auto"
+.INDENT 2.0
+.INDENT 3.5
+Forces the direction of the stems of grace
+notes (always up or always down) or reverts to
+automatic positioning (the default).
+.UNINDENT
+.UNINDENT
+.IP \(bu 2
+"stem=auto"
+.INDENT 2.0
+.INDENT 3.5
+Reverts to automatic positioning of note stems
+(up or down) (the default).
+.UNINDENT
+.UNINDENT
+.IP \(bu 2
+"lyrics=up" or "lyrics=down" or "lyrics=auto"
+.INDENT 2.0
+.INDENT 3.5
+Places lyrics above or below the staff or
+reverts to automatic positioning (the default)
+.UNINDENT
+.UNINDENT
+.IP \(bu 2
+"gchord=up" or "gchord=down"
+.INDENT 2.0
+.INDENT 3.5
+Places guitar chords above (the default) or below the staff.
+.UNINDENT
+.UNINDENT
+.IP \(bu 2
+"stafflines="<value>
+.INDENT 2.0
+.INDENT 3.5
+Sets the number of lines on the staff in question. (default: 5)
+.UNINDENT
+.UNINDENT
+.IP \(bu 2
+"staffscale="<value>
+.INDENT 2.0
+.INDENT 3.5
+Sets the scale of the associated staff up to 3. (default: 1)
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.sp
+All other definitions are ignored.
+.TP
+.B Definition of the staff system
+By default, each voice goes on its own
+staff. The \fB%%staves <definition>\fP
+pseudo\-comment can be used to control staff
+assignment. The <definition>
+consists of voice names (from \fBV:\fP) and pairs of
+parentheses, braces or brackets.
+.INDENT 7.0
+.IP \(bu 2
+When a voice name is not within a pair of
+special characters, it goes on a separate staff.
+.IP \(bu 2
+For voice names enclosed in brackets, a bracket
+is displayed at the beginning of each line that joins
+the staves of the voices in question.
+.IP \(bu 2
+For voice names enclosed in braces, all the
+voices go on two staves (keyboard score). There can be
+at most four voices between a single pair of braces.
+.IP \(bu 2
+For voice names enclosed in parentheses, all the
+voices appear on a single staff.
+.UNINDENT
+.sp
+The \fB|\fP character prevents measure bars from
+being drawn between two staves.
+If \fB%%staves\fP occurs in a tune, all the
+voices not mentioned will not be output at all.
+.sp
+The \fB%%score\fP directive occurs in the ABC
+draft 2.0 standard and is similar to
+the \fB%%staves\fP specification described
+above. The rules are:
+.INDENT 7.0
+.IP \(bu 2
+Voice names within parentheses form a "voice
+group" and go on a single staff. A voice name that is
+not within parentheses forms its own voice group and
+goes on a staff by itself.
+.IP \(bu 2
+Voice groups within braces form a "voice block"
+and are preceded by a big brace in the output. This is
+especially useful for keyboard music.
+.IP \(bu 2
+Voice groups or voice blocks within brackets
+form a "voice block" and will be preceded by a big
+bracket in the output.
+.IP \(bu 2
+If a \fB|\fP character occurs between two
+voice groups or voice blocks, the bar lines in all of
+the associated staves will be continuous.
+.IP \(bu 2
+A single voice surrounded by two voice groups
+can be preceded by an asterisk to make it into a
+"floating" voice. This means that, for each note of the
+voice, a separate decision is made whether it is printed
+on the preceding or the following voice group\(aqs staff.
+.IP \(bu 2
+Voices that appear in the tune body but not in
+the \fB%%score\fP directive will not be output at
+all. If there is no \fB%%score\fP directive, each
+voice will be output on its own staff.
+.IP \(bu 2
+A \fB%%score\fP directive inside a tune
+resets the mechanism so voices can be removed or added.
+.UNINDENT
+.TP
+.B Voice overlay
+You can add notes to a staff without introducing a
+complete extra voice by using the ampersand
+(\fB&\fP).  A single measure can be split into two voices like:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+|F2A2Bc&F2c2bc|
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The \fB(&...&...&)\fP construction allows splitting multiple
+measures:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+|!f!(&GG<G|GG F=E| E2  E(_D/E)|_D D  C      D |C4\- |C
+   &DC<C|CC_D C|=B,2_B,B,   |_A,A,(G,/A,/)B,|F,4\-|F,&)zzD=E|
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+A double ampersand (\fB&&\fP) will allow
+overlaying more than two lines of music but this feature has
+not yet been implemented.
+.TP
+.B Lyrics
+Aligned lyrics under a staff are written as a
+\fBw:\fP line directly below the staff line. For example:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+edc2 edc2|
+w:Three blind mice, three blind mice
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Each word in the \fBw:\fP line (delimited by
+blanks) is associated with one note, in sequence. The
+following special symbols modify this behaviour:
+.INDENT 7.0
+.TP
+.B \fB*\fP
+Skips one note.
+.TP
+.B \fB\-\fP
+Splits a word into two syllables which are
+associated with two adjacent notes. A "\-" is drawn
+between them.
+.TP
+.B \fB|\fP
+Advances to the next bar line.
+.TP
+.B \fB~\fP
+Is output as a space, but unites two words so
+they appear under a single note.
+.TP
+.B \fB_\fP
+Draws a thin underscore from the previous note
+to the next.
+.UNINDENT
+.sp
+To include more than one line of lyrics, use
+multiple \fBw:\fP lines. To include hyphens without
+splitting a word over multiple notes,
+use \fB\e\-\fP\&.
+.sp
+If a word starts with a digit, this is interpreted as a
+stanza number and outdented a bit to the left.
+.TP
+.B Slurs and ties
+The direction of slurs and ties may be controlled using
+the "(," / "(\(aq" and "\-," / "\-\(aq" constructions.
+.TP
+.B Microtone pitches
+Microtone pitches are indicated by a fraction after an
+accidental, as in \fB^3/4c\fP\&. When omitted, the
+numerator defaultes to 1 and the denominator to 2
+(so \fB^/c\fP is the same as \fB^1/2c\fP). The
+numerator and denominator values may not exceed 256. There
+is built\-in support for quarter\-tone accidentals (1/2 and
+3/2 sharps and flats); for other values, rendering functions
+must be defined using \fB%%postscript\fP\&.
+.TP
+.B EPS inclusion
+EPS files may be included inside tunes using the
+pseudo\-comment \fB%%EPS <file>\fP\&.
+.UNINDENT
+.SH SEE ALSO
+.sp
+A brief introduction referencing further documentation is
+installed in <docdir>/abcm2ps/README.md.
+.sp
+The ABC music notation is at \fI\%http://abcnotation.com/\fP\&.
+.sp
+Especially, you may find a discussion of differences with the
+ABC standard at \fI\%http://moinejf.free.fr/abcm2ps\-doc/features.xhtml\fP
+and a list of formatting options at \fI\%http://moinejf.free.fr/abcm2ps\-doc/\fP\&.
+.SH AUTHOR
+.sp
+\fBabcm2ps\fP was written by Jean\-François Moine <\fI\%http://moinejf.free.fr/\fP>
+starting from \fBabc2ps\fP by Michael Methfessel.
+.sp
+Parts of this manual have been written by Anselm Lingnau
+<\fI\%lingnau@debian.org\fP> for the \fBDebian\fP system.
+.sp
+Permission is granted to copy, distribute and/or modify this
+document as long as its origin is not misrepresented.
+.\" Generated by docutils manpage writer.
+.
