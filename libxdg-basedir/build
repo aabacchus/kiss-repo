@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
-./autogen.sh
+autoreconf --force --install
 ./configure \
-	--prefix=/usr
+    --prefix=/usr
 
 make
 make DESTDIR="$1" install
