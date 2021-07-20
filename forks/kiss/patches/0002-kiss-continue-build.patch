@@ -1,0 +1,106 @@
+From 205b6c86570ee7c3c3e930c087094786b4ace239 Mon Sep 17 00:00:00 2001
+From: aabacchus <ben@bvnf.space>
+Date: Mon, 19 Jul 2021 21:16:40 +0100
+Subject: [PATCH 2/2] kiss: continue build
+
+---
+ kiss | 52 +++++++++++++++++++++++++++++++++-------------------
+ 1 file changed, 33 insertions(+), 19 deletions(-)
+
+diff --git a/kiss b/kiss
+index feb706c..6953cc0 100755
+--- a/kiss
++++ b/kiss
+@@ -895,14 +895,7 @@ pkg_build_all() {
+         ! [ -f "$repo_dir/sources" ] || pkg_extract  "$pkg"
+ 
+         pkg_build    "$pkg"
+-        pkg_manifest "$pkg" "$pkg_dir"
+-        pkg_strip    "$pkg"
+-
+-        cd "$pkg_dir/$pkg/$pkg_db/$pkg"
+-
+-        pkg_fix_deps "$pkg"
+-        pkg_etcsums
+-        pkg_tar      "$pkg"
++        pkg_finish_b "$pkg"
+ 
+         if ok "$pkg_update" || ! contains "$explicit" "$pkg"; then
+             log "$pkg" "Needed as a dependency or has an update, installing"
+@@ -920,6 +913,31 @@ pkg_build_all() {
+     esac
+ }
+ 
++pkg_finish_b() {
++    # Finish building a package and create a tarball.
++    pkg="$1"
++    pkg_find "$1"
++
++    # Copy the repository files to the package directory.
++    cp -LRf "$repo_dir" "$pkg_dir/$1/$pkg_db/"
++
++    log "$1" "Successfully built package"
++
++    # arg1: post-build
++    # arg2: package name
++    # arg3: path to DESTDIR
++    run_hook post-build "$1" "$pkg_dir/$1"
++
++    pkg_manifest "$pkg" "$pkg_dir"
++    pkg_strip    "$pkg"
++
++    cd "$pkg_dir/$pkg/$pkg_db/$pkg"
++
++    pkg_fix_deps "$pkg"
++    pkg_etcsums
++    pkg_tar      "$pkg"
++}
++
+ pkg_build() {
+     # Install built packages to a directory under the package name to
+     # avoid collisions with other packages.
+@@ -974,16 +992,6 @@ pkg_build() {
+     # Delete the log file if the build succeeded to prevent the directory
+     # from filling very quickly with useless logs.
+     equ "$KISS_KEEPLOG" 1 || rm -f "$log_dir/$1-$time-$KISS_PID"
+-
+-    # Copy the repository files to the package directory.
+-    cp -LRf "$repo_dir" "$pkg_dir/$1/$pkg_db/"
+-
+-    log "$1" "Successfully built package"
+-
+-    # arg1: post-build
+-    # arg2: package name
+-    # arg3: path to DESTDIR
+-    run_hook post-build "$1" "$pkg_dir/$1"
+ }
+ 
+ pkg_checksums() {
+@@ -1762,6 +1770,11 @@ args() {
+ 
+         i|install)  for pkg do pkg_install "$pkg"; done ;;
+         b|build)    pkg_build_all "${@:?No packages installed}" ;;
++        co|continue)
++            export pkg_dir=${PWD%/*}
++            [ "$1" ] || set -- "${PWD##*/}"
++            pkg_finish_b "$1"
++        ;;
+         d|download) for pkg do pkg_source "$pkg"; done ;;
+         l|list)     pkg_list_version "$@" ;;
+         r|remove)   for pkg in $redro; do pkg_remove "$pkg"; done ;;
+@@ -1771,10 +1784,11 @@ args() {
+         v|version)  printf '5.5.15\n' ;;
+ 
+         '')
+-            log 'kiss [a|b|c|d|i|l|r|s|u|up|v] [pkg]...'
++            log 'kiss [a|b|c|co|d|i|l|r|s|u|up|v] [pkg]...'
+             log 'alternatives List and swap to alternatives'
+             log 'build        Build a package'
+             log 'checksum     Generate checksums'
++            log 'continue     Continue a package build in the current dir'
+             log 'download     Pre-download all sources'
+             log 'install      Install a package'
+             log 'list         List installed packages'
+-- 
+2.32.0
+

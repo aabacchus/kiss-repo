@@ -1,0 +1,51 @@
+From ae02b68c9d9e84aee142a4c1a9fc9e290fa82561 Mon Sep 17 00:00:00 2001
+From: aabacchus <ben@bvnf.space>
+Date: Mon, 19 Jul 2021 20:41:14 +0100
+Subject: [PATCH 1/2] kiss: allow updating packages without updating repos
+
+---
+ kiss | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/kiss b/kiss
+index 0fcd43f..feb706c 100755
+--- a/kiss
++++ b/kiss
+@@ -1571,6 +1571,11 @@ pkg_update() {
+         }
+     done
+ 
++    pkg_upgrades
++
++}
++
++pkg_upgrades() {
+     log "Checking for new package versions"
+ 
+     set +f --
+@@ -1762,10 +1767,11 @@ args() {
+         r|remove)   for pkg in $redro; do pkg_remove "$pkg"; done ;;
+         s|search)   for pkg do pkg_find "$pkg" all; done ;;
+         u|update)   pkg_update ;;
++        up|upgrade) pkg_upgrades ;;
+         v|version)  printf '5.5.17\n' ;;
+ 
+         '')
+-            log 'kiss [a|b|c|d|i|l|r|s|u|v] [pkg]...'
++            log 'kiss [a|b|c|d|i|l|r|s|u|up|v] [pkg]...'
+             log 'alternatives List and swap to alternatives'
+             log 'build        Build a package'
+             log 'checksum     Generate checksums'
+@@ -1774,7 +1780,8 @@ args() {
+             log 'list         List installed packages'
+             log 'remove       Remove a package'
+             log 'search       Search for a package'
+-            log 'update       Update the system'
++            log 'update       Update the system repos and packages'
++            log 'upgrade      Update the system packages'
+             log 'version      Package manager version'
+ 
+             printf '\nRun "kiss help-ext" to see all actions\n'
+-- 
+2.32.0
+
