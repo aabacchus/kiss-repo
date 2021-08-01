@@ -1,8 +1,6 @@
 #!/bin/sh -e
 
-for patch in *.patch; do
-    patch -p1 < "$patch"
-done
+patch -p1 < 0001-kiss-continue-build.patch
 
 mkdir -p \
     "$1/usr/bin" \
@@ -10,7 +8,7 @@ mkdir -p \
 
 cp -f kiss contrib/* "$1/usr/bin/"
 
-for doc in docs/site/*.txt; do case ${doc%%.txt} in
+for doc in docs/site/*.txt doc/*.txt; do case ${doc%%.txt} in
     README|news|blog|screenshots)
         # Skip.
     ;;
