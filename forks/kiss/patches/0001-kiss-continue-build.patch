@@ -1,4 +1,4 @@
-From cc55c04053945bc99309af85b8d81097f1fea927 Mon Sep 17 00:00:00 2001
+From 8b473b5c8dcf3d9cc14e09eaed0b1eacc4f4ed7e Mon Sep 17 00:00:00 2001
 From: aabacchus <ben@bvnf.space>
 Date: Mon, 19 Jul 2021 21:16:40 +0100
 Subject: [PATCH] kiss: continue build
@@ -8,10 +8,10 @@ Subject: [PATCH] kiss: continue build
  1 file changed, 33 insertions(+), 19 deletions(-)
 
 diff --git a/kiss b/kiss
-index 9274ff6..d71de40 100755
+index 23df7d1..50a28be 100755
 --- a/kiss
 +++ b/kiss
-@@ -936,14 +936,7 @@ pkg_build_all() {
+@@ -938,14 +938,7 @@ pkg_build_all() {
          ! [ -f "$repo_dir/sources" ] || pkg_extract  "$pkg"
  
          pkg_build    "$pkg"
@@ -27,7 +27,7 @@ index 9274ff6..d71de40 100755
  
          if ok "$pkg_update" || ! contains "$explicit" "$pkg"; then
              log "$pkg" "Needed as a dependency or has an update, installing"
-@@ -961,6 +954,31 @@ pkg_build_all() {
+@@ -963,6 +956,31 @@ pkg_build_all() {
      esac
  }
  
@@ -59,7 +59,7 @@ index 9274ff6..d71de40 100755
  pkg_build() {
      # Install built packages to a directory under the package name to
      # avoid collisions with other packages.
-@@ -1015,16 +1033,6 @@ pkg_build() {
+@@ -1017,16 +1035,6 @@ pkg_build() {
      # Delete the log file if the build succeeded to prevent the directory
      # from filling very quickly with useless logs.
      equ "$KISS_KEEPLOG" 1 || rm -f "$log_dir/$1-$time-$KISS_PID"
@@ -76,9 +76,9 @@ index 9274ff6..d71de40 100755
  }
  
  pkg_checksum() {
-@@ -1842,6 +1850,11 @@ args() {
+@@ -1853,6 +1861,11 @@ args() {
          a|alternatives) pkg_alternatives "$@" ;;
-         b|build)        pkg_build_all "${@:?No packages installed}" ;;
+         b|build)        pkg_build_all "$@" ;;
          c|checksum)     for pkg do pkg_checksum "$pkg"; done ;;
 +        co|continue)
 +            export pkg_dir=${PWD%/*}
@@ -88,8 +88,8 @@ index 9274ff6..d71de40 100755
          d|download)     for pkg do pkg_source "$pkg"; done ;;
          H|help-ext)     pkg_help_ext "$@" ;;
          i|install)      for pkg do pkg_install "$pkg"; done ;;
-@@ -1853,10 +1866,11 @@ args() {
-         v|version)      printf '5.5.25\n' ;;
+@@ -1864,10 +1877,11 @@ args() {
+         v|version)      printf '5.5.26\n' ;;
  
          '')
 -            log 'kiss [a|b|c|d|i|l|r|s|u|U|v] [pkg]...'
