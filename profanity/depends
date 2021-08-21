@@ -1,0 +1,20 @@
+atk
+cairo
+curl
+gdk-pixbuf
+glib
+gpgme
+freetype-harfbuzz
+gtk+3
+libX11
+libXScrnSaver
+libassuan
+libgcrypt
+libgpg-error
+libstrophe
+ncurses
+pango
+pkgconf make
+python
+readline
+sqlite
