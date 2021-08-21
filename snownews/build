@@ -13,7 +13,7 @@ sed -i '/^include po\/Module.mk$/d' Makefile
 # _XOPEN_SOURCE, but only _XOPEN_SOURCE is checked.
 # In glibc, defining _GNU_SOURCE causes _XOPEN_SOURCE to be defined,
 # but not in musl.
-# (An even better method than this CFLAG is to use `pkgconf --libs ncurses`,
+# (An even better method than this CFLAG is to use `pkgconf --cflags ncurses`,
 # but I want to keep the dependencies down. However, to build with
 # netbsd-curses instead of ncurses, just remove this CFLAG and
 # make sure you've installed pkgconf. :)

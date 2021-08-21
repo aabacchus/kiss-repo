@@ -15,7 +15,7 @@ libSM
 libassuan
 libetpan
 libgpg-error
-libressl
 nettle
+openssl
 pango
 zlib

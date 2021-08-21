@@ -1,9 +1,9 @@
 curl
 gcc
 json-c
-libressl
 libxml2
 ncurses
+openssl
 pkgconf make
 rust make
 sqlite

@@ -3,7 +3,7 @@ automake make
 curl
 cyrus-sasl
 expat
-libressl
 libtool  make
+openssl
 pkgconf  make
 zlib
