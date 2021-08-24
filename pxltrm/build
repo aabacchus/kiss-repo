@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+mkdir -p  "$1/usr/bin/"
+cp pxltrm "$1/usr/bin/pxltrm"
+chmod 755 "$1/usr/bin/pxltrm"
