@@ -1,9 +1,9 @@
 cyrus-sasl
-gdbm
-gnutls
 gpgme
 libassuan
 libgpg-error
+lmdb
 ncurses
+openssl
 zlib
 zstd
