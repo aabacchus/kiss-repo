@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+make fbpdf2
+
+mkdir -p "$1/usr/bin/" \
+    "$1/usr/share/man/man1/"
+cp -f fbpdf2  "$1/usr/bin/fbpdf"
+cp -f fbpdf.1 "$1/usr/share/man/man1/"
