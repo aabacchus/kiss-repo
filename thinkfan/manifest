@@ -26,11 +26,10 @@
 /usr/share/doc/thinkfan/
 /usr/share/doc/
 /usr/share/
-/usr/sbin/thinkfan
-/usr/sbin/
+/usr/bin/thinkfan
+/usr/bin/
 /usr/
 /etc/thinkfan.conf
-/etc/sv/thinkfan/supervise
 /etc/sv/thinkfan/run
 /etc/sv/thinkfan/
 /etc/sv/

@@ -14,7 +14,8 @@ cmake -B build \
 cmake --build   build
 cmake --install build
 
-install -Dm755 src/thinkfan.conf.legacy.5    "$1/usr/share/man/man5/thinkfan.conf.legacy.5"
-install -Dm755 thinkfan.conf                 "$1/etc/thinkfan.conf"
+mv "$1/usr/sbin" "$1/usr/bin"
+
+install -Dm644 src/thinkfan.conf.legacy.5    "$1/usr/share/man/man5/thinkfan.conf.legacy.5"
+install -Dm644 thinkfan.conf                 "$1/etc/thinkfan.conf"
 install -Dm755 thinkfan.run                  "$1/etc/sv/thinkfan/run"
-ln -s /run/runit/supervise.thinkfan          "$1/etc/sv/thinkfan/supervise"
