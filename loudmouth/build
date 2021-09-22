@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+CFLAGS="$CFLAGS -w"
+
+./configure \
+    --prefix=/usr \
+    --with-ssl=openssl
+
+make DESTDIR="$1" install
