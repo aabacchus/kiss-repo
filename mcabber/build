@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+./configure \
+   --prefix=/usr
+
+make DESTDIR="$1" install
+
+for lang in cs de fr it nl pl ru uk; do
+    rm -fr "$1/usr/share/mcabber/help/$lang"
+done
+
+cp mcabberrc.example "$1/usr/share/mcabber/"
