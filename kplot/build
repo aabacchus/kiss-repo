@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+sed 's/^#\(LDADD\)/\1/;
+    s/(PREFIX)\/man/(PREFIX)\/share\/man/;
+    s/444/644/' Makefile > _
+mv _ Makefile
+
+make PREFIX=/usr
+make PREFIX=/usr DESTDIR="$1" install
