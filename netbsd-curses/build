@@ -5,7 +5,8 @@ make \
     DESTDIR="$1" \
     PREFIX=/usr \
     all-static \
-    install-static
+    install-static \
+    install-manpages
 
 # ncurses-compatible script
 install -Dm755 ncurses5-config "$1/usr/bin/ncurses5-config"
