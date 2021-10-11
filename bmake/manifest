@@ -1,6 +1,5 @@
 /var/db/kiss/installed/bmake/version
 /var/db/kiss/installed/bmake/sources
-/var/db/kiss/installed/bmake/post-install
 /var/db/kiss/installed/bmake/manifest
 /var/db/kiss/installed/bmake/checksums
 /var/db/kiss/installed/bmake/build
