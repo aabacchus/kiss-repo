@@ -1,10 +1,6 @@
 /var/db/kiss/installed/neomutt/version
 /var/db/kiss/installed/neomutt/sources
-/var/db/kiss/installed/neomutt/post-install
 /var/db/kiss/installed/neomutt/manifest
-/var/db/kiss/installed/neomutt/files/neomuttrc.5
-/var/db/kiss/installed/neomutt/files/neomutt.1
-/var/db/kiss/installed/neomutt/files/
 /var/db/kiss/installed/neomutt/etcsums
 /var/db/kiss/installed/neomutt/depends
 /var/db/kiss/installed/neomutt/checksums
@@ -40,6 +36,9 @@
 /usr/share/doc/neomutt/samples/Pine.rc
 /usr/share/doc/neomutt/samples/Mush.rc
 /usr/share/doc/neomutt/samples/
+/usr/share/doc/neomutt/oauth2/mutt_oauth2.py.README
+/usr/share/doc/neomutt/oauth2/mutt_oauth2.py
+/usr/share/doc/neomutt/oauth2/
 /usr/share/doc/neomutt/lua/test_lua-api_spec.lua
 /usr/share/doc/neomutt/lua/test_lua-api_runner.neomuttrc
 /usr/share/doc/neomutt/lua/
