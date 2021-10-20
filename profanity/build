@@ -2,6 +2,7 @@
 
 ./configure \
     --prefix=/usr \
-    --enable-pgp
+    --enable-pgp \
+    --disable-python-plugins
 
 make DESTDIR="$1" install
