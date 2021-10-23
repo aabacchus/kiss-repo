@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+export MAKEFLAGS="$MAKEFLAGS -j1"
+
+make PLATFORM=linux PREFIX=/usr
+make PLATFORM=linux PREFIX=/usr DESTDIR="$1" install
