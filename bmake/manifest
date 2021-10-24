@@ -16,6 +16,7 @@
 /usr/share/mk/target-flags.mk
 /usr/share/mk/sys/UnixWare.mk
 /usr/share/mk/sys/SunOS.mk
+/usr/share/mk/sys/SCO_SV.mk
 /usr/share/mk/sys/OpenBSD.mk
 /usr/share/mk/sys/OSF1.mk
 /usr/share/mk/sys/NetBSD.mk
