@@ -1,6 +1,7 @@
 curl
 glib
 gpgme
+libsignal-protocol-c
 libstrophe
 ncurses
 pkgconf make
