@@ -63,6 +63,7 @@
 /usr/include/lld/Common/ErrorHandler.h
 /usr/include/lld/Common/Driver.h
 /usr/include/lld/Common/DWARF.h
+/usr/include/lld/Common/Arrays.h
 /usr/include/lld/Common/Args.h
 /usr/include/lld/Common/
 /usr/include/lld/
@@ -70,6 +71,7 @@
 /usr/bin/wasm-ld
 /usr/bin/lld-link
 /usr/bin/lld
+/usr/bin/ld64.lld.darwinold
 /usr/bin/ld64.lld.darwinnew
 /usr/bin/ld64.lld
 /usr/bin/ld.lld
