@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+sed 's#InitFile "init.scm"#InitFile "'"$KISS_ROOT"'/usr/share/tinyscheme/init.scm"#' \
+    scheme.c > _
+mv _ scheme.c
+
+make all
+
+mkdir -p \
+    "$1/usr/bin/" \
+    "$1/usr/lib/" \
+    "$1/usr/share/tinyscheme/"
+
+cp scheme           "$1/usr/bin/tinyscheme"
+cp libtinyscheme.a  "$1/usr/lib/"
+cp libtinyscheme.so "$1/usr/lib/"
+cp init.scm         "$1/usr/share/tinyscheme/"
