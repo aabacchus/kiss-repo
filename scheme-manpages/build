@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+mkdir -p \
+    "$1/usr/share/man/man3/" \
+    "$1/usr/share/man/man7/"
+
+cp -- man3/*.3scheme "$1/usr/share/man/man3/"
+cp -- man7/*.7scheme "$1/usr/share/man/man7/"
