@@ -1,4 +1,4 @@
 #!/bin/sh -e
 
-make VERSION=v1.9.0
-make PREFIX="$1/usr" install
+make VERSION=v1.9.1
+make DESTDIR="$1" PREFIX=/usr install
