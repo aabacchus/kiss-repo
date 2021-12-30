@@ -2,6 +2,7 @@
 /var/db/kiss/installed/gomuks/sources
 /var/db/kiss/installed/gomuks/manifest
 /var/db/kiss/installed/gomuks/depends
+/var/db/kiss/installed/gomuks/checksums
 /var/db/kiss/installed/gomuks/build
 /var/db/kiss/installed/gomuks/
 /var/db/kiss/installed/
