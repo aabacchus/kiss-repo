@@ -3,12 +3,14 @@
 export DESTDIR=$1
 
 meson build/ \
-	--prefix=/usr \
-	-Dlauncher-logind=false \
-	-Dcolor-management-colord=false \
-	-Dsystemd=false \
-	-Dremoting=false \
-	-Dpipewire=false
+    --prefix=/usr \
+    -Dlauncher-logind=false \
+    -Dcolor-management-colord=false \
+    -Dsystemd=false \
+    -Dremoting=false \
+    -Dbackend-rdp=false \
+    -Dxwayland=false \
+    -Dpipewire=false
 
 ninja -C build
 ninja -C build install
