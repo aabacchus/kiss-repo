@@ -1,7 +1,13 @@
 #!/bin/sh -e
 
+# Make sure the binaries go into /usr/bin
+# shellcheck disable=2016
+sed -i 's@root_sbindir=/sbin@root_sbindir=/usr/bin@;
+    s@sbindir=${exec_prefix}/sbin@sbindir=${exec_prefix}/bin@' configure
+
 ./configure \
     --prefix=/usr \
+    --sbindir=/usr/bin \
     --without-selinux
 
 make
