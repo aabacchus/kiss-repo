@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+export GOFLAGS="-trimpath -modcacherw $GOFLAGS"
+./configure \
+    --prefix=/usr
+
+sed '/GOFLAGS=/d' Makefile > _
+mv _ Makefile
+
+make
+make DESTDIR="$1" install
