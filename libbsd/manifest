@@ -253,7 +253,7 @@
 /usr/lib/pkgconfig/libbsd.pc
 /usr/lib/pkgconfig/libbsd-overlay.pc
 /usr/lib/pkgconfig/
-/usr/lib/libbsd.so.0.11.4
+/usr/lib/libbsd.so.0.11.5
 /usr/lib/libbsd.so.0
 /usr/lib/libbsd.so
 /usr/lib/libbsd.a
