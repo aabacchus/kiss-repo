@@ -53,7 +53,7 @@ Options given immediately after the command name apply to
 the run as a whole; options given after an ABC file name apply
 to that file.
 .sp
-Formatting parameters can also be set in "format files" and
+Formatting parameters can also be set in \(dqformat files\(dq and
 in the ABC files themselves.
 .SH OPTIONS
 .sp
@@ -150,7 +150,7 @@ This corresponds to the \fB%%staffsep\fP formatting parameter
 Produce EPS output instead of simple PS.
 .sp
 In this mode, each tune goes to a different file which
-name is "<name>nnn.eps" or "<title>.eps" (see option \(aq\-O\(aq)
+name is \(dq<name>nnn.eps\(dq or \(dq<title>.eps\(dq (see option \(aq\-O\(aq)
 .INDENT 7.0
 .INDENT 3.5
 .INDENT 0.0
@@ -196,7 +196,7 @@ name and applies to that file.
 .sp
 Ranges of tune numbers may be specified like \fB<t1>\-<t2>\fP;
 <t2> may be omitted which means
-"all remaining tunes until the end of file". Note that
+\(dqall remaining tunes until the end of file\(dq. Note that
 filtering may cause problems, e.g., with global (non\-tune)
 definitions in the ABC file.
 .sp
@@ -235,7 +235,7 @@ are output without XML header.
 Display the current format values.
 .TP
 .B  \-h
-Quick help, equivalent to "abcm2ps" without any arguments.
+Quick help, equivalent to \(dqabcm2ps\(dq without any arguments.
 .sp
 This also shows the default settings for some parameters.
 .TP
@@ -310,7 +310,7 @@ at top right on even pages, top left on odd pages
 For compatibility with previous versions, \(aq+N\(aq is the same as
 \(aq\-N0\(aq, and \(aq\-N\(aq is the same as \(aq\-N2\(aq.
 .sp
-If a header is defined ("%%header"), this option is ignored.
+If a header is defined (\(dq%%header\(dq), this option is ignored.
 .TP
 .B  \-n\fP,\fB  +n
 Include notes and history from ABC tune \fBN:\fP fields.
@@ -342,7 +342,7 @@ with the name:
 \(aqnnn\(aq is a sequence number.
 .sp
 When <name> is present, it is the name of the file, or it
-replaces "Out" in the file name.
+replaces \(dqOut\(dq in the file name.
 .sp
 If <name> is \(aq=\(aq, it is replaced by the name of the ABC
 source file (not for \(aq\-z\(aq).
@@ -445,7 +445,7 @@ example enclosing the ABC sequences by:
 .sp
 .nf
 .ft C
-<div style="line\-height:0"> .. </div>
+<div style=\(dqline\-height:0\(dq> .. </div>
 .ft P
 .fi
 .UNINDENT
@@ -457,7 +457,7 @@ Note that the default output file is \(aqOut.xhtml\(aq, so, don\(aqt
 forget to change the file type if you generate HTML (.html)
 or XML (.xml) files.
 .sp
-See "sample8.html" for a source example.
+See \(dqsample8.html\(dq for a source example.
 .TP
 .B  \-0\fP,\fB  +0
 Split tunes across page breaks if necessary.
@@ -486,7 +486,7 @@ clef=<type><line>[+8|\-8]
 .UNINDENT
 .UNINDENT
 .sp
-"clef=" can be omitted when the <type> is a clef name.
+\(dqclef=\(dq can be omitted when the <type> is a clef name.
 .sp
 <type> denotes the clef type. It  may be:
 .INDENT 7.0
@@ -517,8 +517,8 @@ The available clef names are
 .INDENT 2.0
 .INDENT 3.5
 In percussion mode, accidentals change the glyphs used for
-note heads. By default, sharp notes are drawn as "x" and
-flat notes as circled "x".
+note heads. By default, sharp notes are drawn as \(dqx\(dq and
+flat notes as circled \(dqx\(dq.
 This may be changed by redefining the PostScript functions
 \fBpshhd\fP and \fBpflhd\fP\&.
 .UNINDENT
@@ -537,12 +537,12 @@ the line within the staff that the base clef will be written
 on. The default values are 2 for the treble clef, 3 for the
 alto clef, and 4 for the tenor and bass clefs.
 .sp
-The "+8" and "\-8"
+The \(dq+8\(dq and \(dq\-8\(dq
 options draw an 8 above or below the staff, respectively.
 .sp
 When no clef is specified, clef changes
-between "bass"
-and "treble" will be inserted
+between \(dqbass\(dq
+and \(dqtreble\(dq will be inserted
 automatically.
 .TP
 .B Multi\-voice typesetting
@@ -560,57 +560,57 @@ V:<name> <definition> ...
 .UNINDENT
 .sp
 where <name> is a word consisting of letters and digits only
-(like "violin1"). In the tune body, the
+(like \(dqviolin1\(dq). In the tune body, the
 following notes refer to this voice until
-another "V:" is encountered.
+another \(dqV:\(dq is encountered.
 .sp
 A <definition> can be one of:
 .INDENT 7.0
 .IP \(bu 2
-"clef="...
+\(dqclef=\(dq...
 .INDENT 2.0
 .INDENT 3.5
 See above
 .UNINDENT
 .UNINDENT
 .IP \(bu 2
-"name="<name> or "nm="<name>
+\(dqname=\(dq<name> or \(dqnm=\(dq<name>
 .INDENT 2.0
 .INDENT 3.5
 The <name> will be
 displayed at the beginning of the first staff. It can
-contain "\en" sequences
+contain \(dq\en\(dq sequences
 which will force line breaks. If it contains
 whitespace it must be double\-quoted.
 .UNINDENT
 .UNINDENT
 .IP \(bu 2
-"subname="<name> or "snm="<name>
+\(dqsubname=\(dq<name> or \(dqsnm=\(dq<name>
 .INDENT 2.0
 .INDENT 3.5
 The <name> will be displayed at the beginning of all staves
 except for the first. It can
-contain "\en" sequences
+contain \(dq\en\(dq sequences
 which will force line breaks. If it contains
 whitespace it must be double\-quoted.
 .UNINDENT
 .UNINDENT
 .IP \(bu 2
-"merge"
+\(dqmerge\(dq
 .INDENT 2.0
 .INDENT 3.5
 The voice goes on the same staff as the previous voice.
 .UNINDENT
 .UNINDENT
 .IP \(bu 2
-"up" or "down"
+\(dqup\(dq or \(dqdown\(dq
 .INDENT 2.0
 .INDENT 3.5
 Forces the direction of the stems for the voice.
 .UNINDENT
 .UNINDENT
 .IP \(bu 2
-"dyn=up" or "dyn=down" or "dyn=auto"
+\(dqdyn=up\(dq or \(dqdyn=down\(dq or \(dqdyn=auto\(dq
 .INDENT 2.0
 .INDENT 3.5
 Forces positioning of dynamic marks (above or
@@ -619,7 +619,7 @@ below the staff) or reverts to automatic positioning
 .UNINDENT
 .UNINDENT
 .IP \(bu 2
-"gstem=up" or "gstem=down" or "gstem=auto"
+\(dqgstem=up\(dq or \(dqgstem=down\(dq or \(dqgstem=auto\(dq
 .INDENT 2.0
 .INDENT 3.5
 Forces the direction of the stems of grace
@@ -628,7 +628,7 @@ automatic positioning (the default).
 .UNINDENT
 .UNINDENT
 .IP \(bu 2
-"stem=auto"
+\(dqstem=auto\(dq
 .INDENT 2.0
 .INDENT 3.5
 Reverts to automatic positioning of note stems
@@ -636,7 +636,7 @@ Reverts to automatic positioning of note stems
 .UNINDENT
 .UNINDENT
 .IP \(bu 2
-"lyrics=up" or "lyrics=down" or "lyrics=auto"
+\(dqlyrics=up\(dq or \(dqlyrics=down\(dq or \(dqlyrics=auto\(dq
 .INDENT 2.0
 .INDENT 3.5
 Places lyrics above or below the staff or
@@ -644,21 +644,21 @@ reverts to automatic positioning (the default)
 .UNINDENT
 .UNINDENT
 .IP \(bu 2
-"gchord=up" or "gchord=down"
+\(dqgchord=up\(dq or \(dqgchord=down\(dq
 .INDENT 2.0
 .INDENT 3.5
 Places guitar chords above (the default) or below the staff.
 .UNINDENT
 .UNINDENT
 .IP \(bu 2
-"stafflines="<value>
+\(dqstafflines=\(dq<value>
 .INDENT 2.0
 .INDENT 3.5
 Sets the number of lines on the staff in question. (default: 5)
 .UNINDENT
 .UNINDENT
 .IP \(bu 2
-"staffscale="<value>
+\(dqstaffscale=\(dq<value>
 .INDENT 2.0
 .INDENT 3.5
 Sets the scale of the associated staff up to 3. (default: 1)
@@ -703,17 +703,17 @@ the \fB%%staves\fP specification described
 above. The rules are:
 .INDENT 7.0
 .IP \(bu 2
-Voice names within parentheses form a "voice
-group" and go on a single staff. A voice name that is
+Voice names within parentheses form a \(dqvoice
+group\(dq and go on a single staff. A voice name that is
 not within parentheses forms its own voice group and
 goes on a staff by itself.
 .IP \(bu 2
-Voice groups within braces form a "voice block"
+Voice groups within braces form a \(dqvoice block\(dq
 and are preceded by a big brace in the output. This is
 especially useful for keyboard music.
 .IP \(bu 2
 Voice groups or voice blocks within brackets
-form a "voice block" and will be preceded by a big
+form a \(dqvoice block\(dq and will be preceded by a big
 bracket in the output.
 .IP \(bu 2
 If a \fB|\fP character occurs between two
@@ -722,7 +722,7 @@ the associated staves will be continuous.
 .IP \(bu 2
 A single voice surrounded by two voice groups
 can be preceded by an asterisk to make it into a
-"floating" voice. This means that, for each note of the
+\(dqfloating\(dq voice. This means that, for each note of the
 voice, a separate decision is made whether it is printed
 on the preceding or the following voice group\(aqs staff.
 .IP \(bu 2
@@ -793,7 +793,7 @@ Skips one note.
 .TP
 .B \fB\-\fP
 Splits a word into two syllables which are
-associated with two adjacent notes. A "\-" is drawn
+associated with two adjacent notes. A \(dq\-\(dq is drawn
 between them.
 .TP
 .B \fB|\fP
@@ -818,7 +818,7 @@ stanza number and outdented a bit to the left.
 .TP
 .B Slurs and ties
 The direction of slurs and ties may be controlled using
-the "(," / "(\(aq" and "\-," / "\-\(aq" constructions.
+the \(dq(,\(dq / \(dq(\(aq\(dq and \(dq\-,\(dq / \(dq\-\(aq\(dq constructions.
 .TP
 .B Microtone pitches
 Microtone pitches are indicated by a fraction after an
