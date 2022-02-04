@@ -1,6 +1,7 @@
 /var/db/kiss/installed/b3sum/version
 /var/db/kiss/installed/b3sum/sources
 /var/db/kiss/installed/b3sum/manifest
+/var/db/kiss/installed/b3sum/checksums
 /var/db/kiss/installed/b3sum/build
 /var/db/kiss/installed/b3sum/
 /var/db/kiss/installed/
