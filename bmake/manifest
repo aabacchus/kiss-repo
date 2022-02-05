@@ -76,6 +76,7 @@
 /usr/share/mk/dep.mk
 /usr/share/mk/cython.mk
 /usr/share/mk/compiler.mk
+/usr/share/mk/cc-wrap.mk
 /usr/share/mk/bsd.subdir.mk
 /usr/share/mk/bsd.prog.mk
 /usr/share/mk/bsd.own.mk
