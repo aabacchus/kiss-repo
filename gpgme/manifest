@@ -22,10 +22,10 @@
 /usr/lib/pkgconfig/gpgme.pc
 /usr/lib/pkgconfig/gpgme-glib.pc
 /usr/lib/pkgconfig/
-/usr/lib/libgpgmepp.so.6.12.1
+/usr/lib/libgpgmepp.so.6.14.0
 /usr/lib/libgpgmepp.so.6
 /usr/lib/libgpgmepp.so
-/usr/lib/libgpgme.so.11.24.1
+/usr/lib/libgpgme.so.11.26.0
 /usr/lib/libgpgme.so.11
 /usr/lib/libgpgme.so
 /usr/lib/cmake/Gpgmepp/GpgmeppConfigVersion.cmake
@@ -63,6 +63,7 @@
 /usr/include/gpgme++/gpggencardkeyinteractor.h
 /usr/include/gpgme++/gpgagentgetinfoassuantransaction.h
 /usr/include/gpgme++/gpgadduserideditinteractor.h
+/usr/include/gpgme++/gpgaddexistingsubkeyeditinteractor.h
 /usr/include/gpgme++/global.h
 /usr/include/gpgme++/exception.h
 /usr/include/gpgme++/eventloopinteractor.h
