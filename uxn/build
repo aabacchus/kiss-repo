@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+./build.sh --no-run
+
+mkdir -p \
+    "$1/usr/bin/" \
+    "$1/usr/share/uxn/"
+
+cp bin/uxnasm bin/uxncli bin/uxnemu \
+    "$1/usr/bin/"
+cp -R projects/            "$1/usr/share/uxn/"
+cp -R etc/syntax-highlight "$1/usr/share/uxn/"
