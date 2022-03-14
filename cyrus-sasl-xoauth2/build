@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
+# remove annoying messages
+sed '/SASL_LOG_DEBUG/d' xoauth2_client.c > _
+mv _ xoauth2_client.c
+
 ./autogen.sh
 ./configure \
     --prefix=/usr
