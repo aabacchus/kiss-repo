@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --disable-server
+
+patch -p1 < getline.patch
+
+make
+make DESTDIR="$1" install

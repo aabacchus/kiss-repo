@@ -1,0 +1,26 @@
+diff --git a/lib/getline.c b/lib/getline.c
+index 9830b4d..c57a2fa 100644
+--- a/lib/getline.c
++++ b/lib/getline.c
+@@ -154,7 +154,7 @@ getstr (lineptr, n, stream, terminator, offset, limit)
+   return ret;
+ }
+ 
+-int
++ssize_t
+ getline (lineptr, n, stream)
+      char **lineptr;
+      size_t *n;
+diff --git a/lib/getline.h b/lib/getline.h
+index 3bbad56..afd31b4 100644
+--- a/lib/getline.h
++++ b/lib/getline.h
+@@ -11,7 +11,7 @@
+ 
+ #define GETLINE_NO_LIMIT -1
+ 
+-int
++ssize_t
+   getline __PROTO ((char **_lineptr, size_t *_n, FILE *_stream));
+ int
+   getline_safe __PROTO ((char **_lineptr, size_t *_n, FILE *_stream,
