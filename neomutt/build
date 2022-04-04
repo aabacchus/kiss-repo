@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+:> nostrip
+export CC="clang"
+
 # enable building with netbsd-curses
 sed -i 's/tinfow tinfo/tinfow tinfo terminfo/g;/Unable to find xsltproc/d;
     s@xmlcatalog@/bin/true@' \
@@ -8,6 +11,8 @@ sed -i 's/tinfow tinfo/tinfow tinfo terminfo/g;/Unable to find xsltproc/d;
 ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
+    --autocrypt \
+    --asan \
     --ssl \
     --sasl \
     --gpgme \
@@ -22,7 +27,7 @@ sed -i 's/tinfow tinfo/tinfow tinfo terminfo/g;/Unable to find xsltproc/d;
 sed '/^.*_TARGETS=/s/ .*-docs//;s/xsltproc/:/g' Makefile > _
 mv _ Makefile
 
-make
+make EXTRA_CFLAGS="-g -Og"
 make docs/neomuttrc docs/neomutt.1 docs/neomuttrc.5
 make DESTDIR="$1" install
 
