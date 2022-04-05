@@ -1,0 +1,8 @@
+curl
+imlib2
+libX11
+libXinerama
+libXt
+libexif
+libjpeg-turbo
+libpng
