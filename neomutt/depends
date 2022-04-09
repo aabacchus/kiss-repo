@@ -5,5 +5,6 @@ libgpg-error
 lmdb
 ncurses
 openssl
+sqlite
 zlib
 zstd
