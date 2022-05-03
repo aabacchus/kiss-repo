@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-cd bmake
-
 sed -i 's/build) op_test/build) /' boot-strap
 sed -i '/op_test$/d' boot-strap
 
@@ -22,8 +20,8 @@ INSTALL=install \
 chmod 755   "$1/usr/bin/bmake"
 
 rm -rf      "$1/usr/share/man/cat1"
-mkdir -p    "$1/usr/share/man/man1/"
+mkdir -p    "$1/usr/share/man/man1/" "$1/usr/share/licenses/bmake/"
+
 cp bmake.1  "$1/usr/share/man/man1/bmake.1"
 ln -s bmake "$1/usr/bin/make"
-mkdir -p    "$1/usr/share/licenses/bmake/"
 cp LICENSE  "$1/usr/share/licenses/bmake/bmake.license"
