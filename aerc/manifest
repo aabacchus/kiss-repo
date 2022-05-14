@@ -32,7 +32,9 @@
 /usr/share/aerc/templates/
 /usr/share/aerc/stylesets/default
 /usr/share/aerc/stylesets/
+/usr/share/aerc/filters/show-ics-details.py
 /usr/share/aerc/filters/plaintext
+/usr/share/aerc/filters/html-unsafe
 /usr/share/aerc/filters/html
 /usr/share/aerc/filters/hldiff
 /usr/share/aerc/filters/colorize
