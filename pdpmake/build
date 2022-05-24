@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-make
+make CFLAGS="$CFLAGS -DENABLE_FEATURE_MAKE_EXTENSIONS"
 mkdir -p "$1/usr/bin/"
 cp make  "$1/usr/bin/make"
 cp make  "$1/usr/bin/pdpmake"
