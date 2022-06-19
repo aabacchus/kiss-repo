@@ -1,0 +1,5 @@
+bison make
+pkgconf make
+libX11
+libXft
+libXrandr
