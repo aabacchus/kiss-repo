@@ -1,5 +1,7 @@
 /var/db/kiss/installed/herbe/version
 /var/db/kiss/installed/herbe/sources
+/var/db/kiss/installed/herbe/patches/vertical_stacking.patch
+/var/db/kiss/installed/herbe/patches/
 /var/db/kiss/installed/herbe/manifest
 /var/db/kiss/installed/herbe/files/config.def.h
 /var/db/kiss/installed/herbe/files/

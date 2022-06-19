@@ -1,2 +1,3 @@
 https://github.com/dudik/herbe/archive/1.0.0.tar.gz
 files/config.def.h
+patches/vertical_stacking.patch
