@@ -1,8 +1,0 @@
-#!/bin/sh -e
-
-export GOPATH="$PWD/go"
-export GO111MODULE=on
-export GOFLAGS="$GOFLAGS -modcacherw -trimpath"
-
-make PREFIX=/usr
-make DESTDIR="$1" PREFIX=/usr install
