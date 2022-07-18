@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+# Link to libbsd; Makefile doesn't respect LDFLAGS
+# shellcheck disable=SC2016
+sed 's/\(\$(CC) -g -o \$@ \$(OBJS)\)/\1 -lbsd/' Makefile > _
+mv -f _ Makefile
+
+make CFLAGS="-isystem /usr/include/bsd -DLIBBSD_OVERLAY"
+make PREFIX=/usr DESTDIR="$1" install
+
+mkdir "$1/usr/share/"
+mv "$1/usr/man" "$1/usr/share/man"
