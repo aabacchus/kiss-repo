@@ -38,6 +38,7 @@
 /usr/share/aerc/filters/html
 /usr/share/aerc/filters/hldiff
 /usr/share/aerc/filters/colorize
+/usr/share/aerc/filters/calendar
 /usr/share/aerc/filters/
 /usr/share/aerc/binds.conf
 /usr/share/aerc/aerc.conf
