@@ -1,0 +1,12 @@
+--- /src/main.c
++++ /src/main.c
+@@ -665,6 +665,9 @@ main( int argc, char **argv )
+ 		case 'H':
+ 			op = XOP_PUSH;
+ 			goto cac;
++		case 'p':
++			DFlags |= PROGRESS;
++			break;
+ 		case 'q':
+ 			if (DFlags & QUIET)
+ 				DFlags |= VERYQUIET;
