@@ -1,0 +1,53 @@
+#!/bin/sh -e
+
+# To keep all the downloading to be done by kiss, replicate what fonts/fonts.sh
+# does (except the downloading) here:
+(
+    cd fonts
+    mv urw-base35*/fonts/*.t1 .
+    mv urw-base35*/fonts/*.afm .
+    rm -r urw-base35*/
+
+    unzip -q amsfonts.zip 'fonts/**'
+    for x in fonts/afm/public/amsfonts/cm/*.afm
+    do
+        cp "$x" "$(basename "$x" .afm | tr '[:lower:]' '[:upper:]').afm"
+    done
+    for x in fonts/type1/public/amsfonts/cm/*.pfb
+    do
+        mv "$x" "$(basename "$x" .pfb | tr '[:lower:]' '[:upper:]').pfb"
+    done
+    rm -fr fonts/ bfonts.tar.gz irfonts.tar.gz amsfonts.zip
+)
+
+make BASE=/usr/share/neatroff neat
+make BASE=/usr/share/neatroff DESTDIR="$1" install
+
+# Everything is installed to BASE. We move some bits to more useful locations.
+B="$1/usr/share/neatroff"
+mv "$B/share/man" "$1/usr/share/"
+mkdir -p "$1/usr/bin"
+mv "$B/neateqn/eqn"     "$1/usr/bin/neateqn"
+mv "$B/neatmkfn/mkfn"   "$1/usr/bin/neatmkfn"
+mv "$B/neatpost/pdf"    "$1/usr/bin/neatpdf"
+mv "$B/neatpost/post"   "$1/usr/bin/neatpost"
+mv "$B/neatrefer/refer" "$1/usr/bin/neatrefer"
+mv "$B/neatroff/roff"   "$1/usr/bin/neatroff"
+mv "$B/shape/shape"     "$1/usr/bin/neatshape"
+mv "$B/soin/soin"       "$1/usr/bin/neatsoin"
+mv "$B/troff/pic/pic"   "$1/usr/bin/neatpic"
+mv "$B/troff/tbl/tbl"   "$1/usr/bin/neattbl"
+
+ln -s neateqn   "$1/usr/bin/eqn"
+ln -s neatmkfn  "$1/usr/bin/mkfn"
+ln -s neatpdf   "$1/usr/bin/pdf"
+ln -s neatpost  "$1/usr/bin/post"
+ln -s neatrefer "$1/usr/bin/refer"
+ln -s neatroff  "$1/usr/bin/roff"
+ln -s neatshape "$1/usr/bin/shape"
+ln -s neatsoin  "$1/usr/bin/soin"
+ln -s neatpic   "$1/usr/bin/pic"
+ln -s neattbl   "$1/usr/bin/tbl"
+
+rmdir "$B/neateqn" "$B/neatmkfn" "$B/neatpost" "$B/neatrefer" "$B/neatroff" \
+    "$B/shape" "$B/soin" "$B/troff/pic" "$B/troff/tbl" "$B/troff" "$B/share"

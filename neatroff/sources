@@ -1,0 +1,9 @@
+git+https://github.com/aligrudi/neatroff_make
+git+https://github.com/aligrudi/neatroff  neatroff
+git+https://github.com/aligrudi/neatpost  neatpost
+git+https://github.com/aligrudi/neatmkfn  neatmkfn
+git+https://github.com/aligrudi/neateqn   neateqn
+git+https://github.com/aligrudi/neatrefer neatrefer
+git+https://github.com/aligrudi/troffp9   troff
+https://github.com/ArtifexSoftware/urw-base35-fonts/archive/20170801.1.tar.gz fonts/urw-base35-fonts
+https://www.ams.org/arc/tex/amsfonts.zip fonts/
