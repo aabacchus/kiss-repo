@@ -2,3 +2,7 @@ This is my personal repo, where I keep ~random~ things.
 
 Feel free to copy any of these, or even clone the repo and use them directly,
 but I make no promise of updates. They should build, though.
+
+Each package contains a `manifest` file in addition to the usual required files.
+This allows you to search through packages which aren't installed to find which
+provides a certain file, for example.
