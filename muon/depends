@@ -1,2 +1,4 @@
 curl
 pkgconf
+samurai make
+scdoc make

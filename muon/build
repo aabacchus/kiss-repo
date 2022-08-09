@@ -1,15 +1,13 @@
 #!/bin/sh -e
 
+export DESTDIR="$1"
+
 ./bootstrap.sh build
-./build/muon \
-    setup build
+./build/muon setup \
+    -Dprefix=/usr \
+    -Ddocs=enabled \
+    build
+
 ninja -C build
 
-mkdir -p \
-    "$1/usr/bin" \
-    "$1/usr/share/man/man1" \
-    "$1/usr/share/man/man5"
-
-cp build/muon               "$1/usr/bin/"
-cp build/doc/muon.1         "$1/usr/share/man/man1/"
-cp build/doc/meson.build.5 "$1/usr/share/man/man5/"
+./build/muon -C build install
