@@ -22,6 +22,7 @@
 /usr/share/profanity/themes/mono
 /usr/share/profanity/themes/jubalian
 /usr/share/profanity/themes/joker
+/usr/share/profanity/themes/irssi
 /usr/share/profanity/themes/headache
 /usr/share/profanity/themes/hacker
 /usr/share/profanity/themes/gruvbox
@@ -57,6 +58,7 @@
 /usr/share/man/man1/profanity-statusbar.1
 /usr/share/man/man1/profanity-status.1
 /usr/share/man/man1/profanity-states.1
+/usr/share/man/man1/profanity-stamp.1
 /usr/share/man/man1/profanity-splash.1
 /usr/share/man/man1/profanity-software.1
 /usr/share/man/man1/profanity-slashguard.1
@@ -84,6 +86,7 @@
 /usr/share/man/man1/profanity-pgp.1
 /usr/share/man/man1/profanity-paste.1
 /usr/share/man/man1/profanity-ox.1
+/usr/share/man/man1/profanity-ox-setup.1
 /usr/share/man/man1/profanity-outtype.1
 /usr/share/man/man1/profanity-otr.1
 /usr/share/man/man1/profanity-os.1
