@@ -1,0 +1,7 @@
+libbsd
+libevent
+libmd
+ncurses
+openssl
+util-linux
+zlib
