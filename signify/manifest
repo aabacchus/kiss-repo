@@ -1,6 +1,7 @@
 /var/db/kiss/installed/signify/version
 /var/db/kiss/installed/signify/sources
 /var/db/kiss/installed/signify/manifest
+/var/db/kiss/installed/signify/depends
 /var/db/kiss/installed/signify/checksums
 /var/db/kiss/installed/signify/build
 /var/db/kiss/installed/signify/
