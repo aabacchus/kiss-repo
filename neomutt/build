@@ -4,9 +4,10 @@
 export CC="clang"
 
 # enable building with netbsd-curses
-sed -i 's/tinfow tinfo/tinfow tinfo terminfo/g;/Unable to find xsltproc/d;
+sed 's/tinfow tinfo/tinfow tinfo terminfo/g;/Unable to find xsltproc/d;
     s@xmlcatalog@/bin/true@' \
-    auto.def
+    auto.def >_
+mv _ auto.def
 
 ./configure \
     --prefix=/usr \

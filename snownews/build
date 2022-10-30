@@ -5,7 +5,8 @@
     --disable-nls
 
 # remove gettext make dep by not building other language support
-sed -i '/^include po\/Module.mk$/d' Makefile
+sed '/^include po\/Module.mk$/d' Makefile >_
+mv _ Makefile
 
 
 # The _XOPEN_SOURCE definition is to workaround a bug in ncurses
