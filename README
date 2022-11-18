@@ -6,3 +6,7 @@ but I make no promise of updates. They should build, though.
 Each package contains a `manifest` file in addition to the usual required files.
 This allows you to search through packages which aren't installed to find which
 provides a certain file, for example.
+
+The kiss-find package may be of interest to you; it uses a database generated
+in my repo at https://github.com/aabacchus/kiss-find and is the only version
+around which currently works, as far as I can tell.
