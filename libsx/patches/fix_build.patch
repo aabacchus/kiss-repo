@@ -1,0 +1,30 @@
+diff --git a/src/colorsel.c b/src/colorsel.c
+index f4ea7be..7ded392 100644
+--- a/src/colorsel.c
++++ b/src/colorsel.c
+@@ -32,8 +32,6 @@ char *SX_ColorSelector_Label[] = {
+ #define BOX_WIDTH  120
+ #define BOX_HEIGHT 120
+ 
+-extern int strcasecmp __P ((__const char *__s1, __const char *__s2));
+-extern int lstat __P ((__const char *__file, struct stat *__buf));
+ extern float __dir__;
+ static int whichdir;
+ 
+diff --git a/src/xstuff.h b/src/xstuff.h
+index bd98009..641647f 100644
+--- a/src/xstuff.h
++++ b/src/xstuff.h
+@@ -1,9 +1,10 @@
+ #include <X11/Intrinsic.h>
++#include <X11/IntrinsicP.h>
+ #include <X11/StringDefs.h>
+ #include <X11/Xutil.h>
+ #include <X11/Shell.h>
+-#include <X11/Xaw3dxft/Form.h>
+-#include <X11/Xaw3dxft/Label.h>
++#include <X11/Xaw/Form.h>
++#include <X11/Xaw/Label.h>
+ 
+ #ifdef    OPENGL_SUPPORT
+ #include <GL/gl.h>
