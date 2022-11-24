@@ -1,5 +1,0 @@
-#!/bin/sh -e
-
-unzip sdlmanpages.zip
-mkdir -p "$1/usr/share/man/man3"
-cp sdlmanpages/man3/*.3 "$1/usr/share/man/man3/"
