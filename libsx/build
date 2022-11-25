@@ -15,6 +15,6 @@ make -j1
 make DESTDIR="$1" install
 
 mkdir -p \
-    "$1/usr/share/docs/libsx/html" \
-    "$1/usr/share/docs/libsx/text"
-cp -R docs/* "$1/usr/share/docs/libsx/"
+    "$1/usr/share/doc/libsx/html" \
+    "$1/usr/share/doc/libsx/text"
+cp -R docs/* "$1/usr/share/doc/libsx/"
