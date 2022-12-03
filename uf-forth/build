@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+uxnasm kernel.tal kernel.rom
+uxncli kernel.rom <uf.f
+
+mkdir -p "$1/usr/bin/" "$1/usr/share/uf/"
+cp uf.rom ufx.rom "$1/usr/share/uf/"
+
+cat > "$1/usr/bin/uf" <<EOF
+#!/bin/sh
+
+uxnemu /usr/share/uf/uf.rom "\$@"
+EOF
+
+cat > "$1/usr/bin/ufx" <<EOF
+#!/bin/sh
+
+uxncli /usr/share/uf/ufx.rom "\$@"
+EOF
+
+chmod +x "$1/usr/bin/uf" "$1/usr/bin/ufx"
