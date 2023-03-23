@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 :> nostrip
-export CC="clang"
+#export CC="clang"
 
 # enable building with netbsd-curses
 sed 's/tinfow tinfo/tinfow tinfo terminfo/g;/Unable to find xsltproc/d;
@@ -13,7 +13,6 @@ mv _ auto.def
     --prefix=/usr \
     --sysconfdir=/etc \
     --autocrypt \
-    --asan \
     --ssl \
     --sasl \
     --gpgme \
