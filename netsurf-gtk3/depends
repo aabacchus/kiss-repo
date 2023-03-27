@@ -1,0 +1,16 @@
+curl
+gtk+3
+libcss make
+libdom make
+libhubbub make
+libjpeg-turbo
+libnsbmp make
+libnsgif make
+libnsutils make
+libparserutils make
+libpng
+libutf8proc
+libwapcaplet make
+netsurf-buildsystem make
+nsgenbind make
+openssl

@@ -2,7 +2,6 @@
 /var/db/kiss/installed/libnsgif/sources
 /var/db/kiss/installed/libnsgif/manifest
 /var/db/kiss/installed/libnsgif/depends
-/var/db/kiss/installed/libnsgif/checksums
 /var/db/kiss/installed/libnsgif/build
 /var/db/kiss/installed/libnsgif/
 /var/db/kiss/installed/
@@ -11,12 +10,8 @@
 /var/
 /usr/lib/pkgconfig/libnsgif.pc
 /usr/lib/pkgconfig/
-/usr/lib/libnsgif.so.0.2.1
-/usr/lib/libnsgif.so.0
-/usr/lib/libnsgif.so
 /usr/lib/libnsgif.a
 /usr/lib/
-/usr/include/libnsgif/libnsgif.h
-/usr/include/libnsgif/
+/usr/include/nsgif.h
 /usr/include/
 /usr/

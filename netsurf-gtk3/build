@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+sed 's@libutf8proc/@@' utils/idna.c >_
+mv _ utils/idna.c
+
+make PREFIX=/usr TARGET=gtk3
+make PREFIX=/usr DESTDIR="$1" install
+
+mkdir -p "$1/usr/share/man/man1"
+cp docs/netsurf-gtk.1 "$1/usr/share/man/man1/"

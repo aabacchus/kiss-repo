@@ -1,0 +1,5 @@
+expat make
+libhubbub make
+libparserutils make
+libwapcaplet make
+netsurf-buildsystem make

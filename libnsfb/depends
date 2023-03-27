@@ -1,0 +1,5 @@
+libxcb make
+netsurf-buildsystem make
+xcb-util-image make
+xcb-util-keysyms make
+xcb-util-wm make

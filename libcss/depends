@@ -1,0 +1,3 @@
+libparserutils make
+libwapcaplet make
+netsurf-buildsystem make

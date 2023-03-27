@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+export CFLAGS="$CFLAGS -Wno-error=maybe-uninitialized"
+make PREFIX=/usr DESTDIR="$1" install

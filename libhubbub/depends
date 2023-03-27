@@ -1,0 +1,4 @@
+gperf make
+libparserutils make
+netsurf-buildsystem make
+pkgconf make

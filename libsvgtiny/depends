@@ -1,0 +1,4 @@
+gperf make
+libdom make
+libwapcaplet make
+netsurf-buildsystem make

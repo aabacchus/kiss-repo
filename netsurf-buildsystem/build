@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+sed 's/install -C/install/' makefiles/Makefile.tools >_
+mv _ makefiles/Makefile.tools
+
+make PREFIX=/usr DESTDIR="$1" install
+rm -fr "$1/usr/share/netsurf-buildsystem/citools/"
