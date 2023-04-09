@@ -9,11 +9,10 @@
 /var/db/kiss/
 /var/db/
 /var/
-/usr/local/share/man/man1/xmenu.1
-/usr/local/share/man/man1/
-/usr/local/share/man/
-/usr/local/share/
-/usr/local/bin/xmenu
-/usr/local/bin/
-/usr/local/
+/usr/share/man/man1/xmenu.1
+/usr/share/man/man1/
+/usr/share/man/
+/usr/share/
+/usr/bin/xmenu
+/usr/bin/
 /usr/
