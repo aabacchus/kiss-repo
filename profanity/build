@@ -4,6 +4,6 @@
     --prefix=/usr \
     --enable-pgp \
     --enable-omemo \
-    --disable-python-plugins
+    --enable-python-plugins
 
 make DESTDIR="$1" install
