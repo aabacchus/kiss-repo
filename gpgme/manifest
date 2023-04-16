@@ -22,10 +22,10 @@
 /usr/lib/pkgconfig/gpgme.pc
 /usr/lib/pkgconfig/gpgme-glib.pc
 /usr/lib/pkgconfig/
-/usr/lib/libgpgmepp.so.6.15.0
+/usr/lib/libgpgmepp.so.6.16.0
 /usr/lib/libgpgmepp.so.6
 /usr/lib/libgpgmepp.so
-/usr/lib/libgpgme.so.11.27.0
+/usr/lib/libgpgme.so.11.28.0
 /usr/lib/libgpgme.so.11
 /usr/lib/libgpgme.so
 /usr/lib/cmake/Gpgmepp/GpgmeppConfigVersion.cmake

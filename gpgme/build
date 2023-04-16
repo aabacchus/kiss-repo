@@ -5,3 +5,4 @@
 
 make
 make DESTDIR="$1" install
+cp -f src/gpgme-config "$1/usr/bin/"
