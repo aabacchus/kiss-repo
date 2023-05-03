@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# Needed for musl >= 1.2.4 until next release of libbsd.
+export CFLAGS="$CFLAGS -D_LARGEFILE64_SOURCE"
+
 ./configure \
     --prefix=/usr
 
