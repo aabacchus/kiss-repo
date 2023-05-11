@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+patch -p0 < alsa-fix.patch
+
+./configure \
+    PREFIX=/usr \
+    MANDIR=/usr/share/man \
+    BACKEND=alsa
+
+make
+make DESTDIR="$1" install
+
+chmod u+w "$1/usr/bin/amused" "$1/usr/share/man/man1/amused.1"

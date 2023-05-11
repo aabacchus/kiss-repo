@@ -1,0 +1,7 @@
+alsa-lib
+flac
+libevent
+libvorbis
+mpg123
+opusfile
+pkgconf make

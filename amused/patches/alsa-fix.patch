@@ -1,0 +1,11 @@
+--- configure
++++ configure
+@@ -554,6 +554,8 @@
+ 	else
+ 		BACKEND=sndio
+ 	fi
++else
++    HAVE_SIO_FLUSH=0
+ fi
+ 
+ if [ $BACKEND != sndio ]; then # auto or alsa
