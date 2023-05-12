@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+makewhatis -d /usr/share/man \
+    /usr/share/man/man1/vi.1 \
+    /usr/share/man/man7/vi_regex.7 \
+    /usr/share/man/man8/virecover.8

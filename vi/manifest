@@ -1,5 +1,6 @@
 /var/db/kiss/installed/vi/version
 /var/db/kiss/installed/vi/sources
+/var/db/kiss/installed/vi/post-install
 /var/db/kiss/installed/vi/manifest
 /var/db/kiss/installed/vi/depends
 /var/db/kiss/installed/vi/checksums
