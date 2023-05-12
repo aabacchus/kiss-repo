@@ -1,0 +1,25 @@
+#!/bin/sh -e
+
+make
+
+mkdir -p \
+    "$1/usr/bin/" \
+    "$1/usr/libexec" \
+    "$1/usr/share/doc/vi" \
+    "$1/usr/share/man/man1" \
+    "$1/usr/share/man/man7" \
+    "$1/usr/share/man/man8"
+
+cp -f bin/vi "$1/usr/bin/vi"
+ln -s vi     "$1/usr/bin/ex"
+ln -s vi     "$1/usr/bin/view"
+
+dp=docs/USD.doc
+cp -f "$dp/vi.man/vi.1"          "$1/usr/share/man/man1"
+cp -f "$dp/re_format/vi_regex.7" "$1/usr/share/man/man7"
+cp -f \
+    "$dp/edit/edittut.ms" "$dp/exref/"* "$dp/vitut/"* \
+    "$1/usr/share/doc/vi/"
+
+cp -f scripts/virecover   "$1/usr/libexec"
+cp -f scripts/virecover.8 "$1/usr/share/man/man8/"
