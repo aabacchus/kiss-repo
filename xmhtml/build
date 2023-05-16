@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+make
+
+mkdir -p "$1/usr/lib/" "$1/usr/include/XmHTML/"
+cp lib/libXmHTML.* "$1/usr/lib/"
+cp include/XmHTML/*.h "$1/usr/include/XmHTML/"
