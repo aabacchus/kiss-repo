@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+make
+
+mkdir -p   "$1/usr/bin/"
+cp abc2prt "$1/usr/bin/"
