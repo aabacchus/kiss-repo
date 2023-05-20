@@ -1,7 +1,5 @@
 /var/db/kiss/installed/amused/version
 /var/db/kiss/installed/amused/sources
-/var/db/kiss/installed/amused/patches/alsa-fix.patch
-/var/db/kiss/installed/amused/patches/
 /var/db/kiss/installed/amused/manifest
 /var/db/kiss/installed/amused/depends
 /var/db/kiss/installed/amused/checksums
