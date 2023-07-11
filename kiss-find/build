@@ -1,4 +1,0 @@
-#!/bin/sh -e
-
-mkdir -p        "$1/usr/bin/"
-cp kiss-find.sh "$1/usr/bin/kiss-find"
