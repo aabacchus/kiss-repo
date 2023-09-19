@@ -3,6 +3,7 @@ gpgme
 libassuan
 libgpg-error
 lmdb
+lua make
 ncurses
 openssl
 sqlite

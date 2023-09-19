@@ -19,6 +19,7 @@ mv _ auto.def
     --lmdb \
     --disable-nls \
     --disable-idn2 \
+    --enable-lua \
     --zlib \
     --zstd
 
