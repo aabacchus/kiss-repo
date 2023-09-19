@@ -40,7 +40,6 @@
 /usr/share/
 /usr/bin/kiss-size
 /usr/bin/kiss-revdepends
-/usr/bin/kiss-preferred
 /usr/bin/kiss-owns
 /usr/bin/kiss-outdated
 /usr/bin/kiss-orphans
