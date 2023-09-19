@@ -1,5 +1,6 @@
 #!/bin/sh -e
 
+export CFLAGS="$CFLAGS -fPIC"
 make \
     LDFLAGS="$LDFLAGS -static" \
     DESTDIR="$1" \
@@ -13,3 +14,11 @@ install -Dm755 ncurses5-config "$1/usr/bin/ncurses5-config"
 
 # Install the license
 install -Dm755 COPYING "$1/usr/share/licenses/netbsd-curses/COPYING"
+
+# note: ncurses has symlinks from the non-wide libs to the wide libs,
+# netbsd-curses has symlinks from the wide libs to the non-wide libs
+# ie.
+#         ncurses has /usr/lib/libform.a  -> libformw.a
+#   netbsd-curses has /usr/lib/libformw.a -> libform.a
+#
+# which makes kiss alternatives get itself into sticky situations going one way.
