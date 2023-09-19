@@ -1,9 +1,0 @@
-#!/bin/sh -e
-
-export CFLAGS="$CFLAGS -D_LARGEFILE64_SOURCE"
-./configure \
-    --prefix=/usr
-
-make
-make DESTDIR="$1" install
-cp -f src/gpgme-config "$1/usr/bin/"
