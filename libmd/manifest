@@ -8,6 +8,8 @@
 /var/db/kiss/
 /var/db/
 /var/
+/usr/share/man/man7/libmd.7
+/usr/share/man/man7/
 /usr/share/man/man3/sha2.3
 /usr/share/man/man3/sha1.3
 /usr/share/man/man3/rmd160.3
@@ -90,7 +92,7 @@
 /usr/share/
 /usr/lib/pkgconfig/libmd.pc
 /usr/lib/pkgconfig/
-/usr/lib/libmd.so.0.0.5
+/usr/lib/libmd.so.0.1.0
 /usr/lib/libmd.so.0
 /usr/lib/libmd.so
 /usr/lib/libmd.a
