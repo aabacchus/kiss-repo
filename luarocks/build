@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+luav=$(kiss l lua)
+luav=${luav#lua }
+luav=${luav%.*}
+
+./configure \
+    --lua-version="$luav" \
+    --with-lua=/usr \
+    --prefix=/usr
+
+make
+make DESTDIR="$1" install
