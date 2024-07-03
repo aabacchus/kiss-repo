@@ -1,7 +1,6 @@
 #!/bin/sh -e
 
-luav=$(kiss l lua)
-luav=${luav#lua }
+luav=$(pkgconf --modversion lua)
 luav=${luav%.*}
 
 ./configure \
