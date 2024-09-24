@@ -9,6 +9,10 @@
 /var/db/kiss/
 /var/db/
 /var/
+/usr/share/man/man1/pdpmake.1
+/usr/share/man/man1/
+/usr/share/man/
+/usr/share/
 /usr/bin/pdpmake
 /usr/bin/make
 /usr/bin/
