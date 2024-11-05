@@ -1,0 +1,186 @@
+From 21449a1dbe4c0ed10e5ff5270b1a69b601dd40c7 Mon Sep 17 00:00:00 2001
+From: phoebos <ben@bvnf.space>
+Date: Tue, 5 Nov 2024 16:15:53 +0000
+Subject: [PATCH] add XEmbed support
+
+add a -window <ID> argument which is used as the X parent window ID, for
+use with things like tabbed.
+---
+ default.c |  2 ++
+ drivers.c |  8 ++++----
+ links.h   |  5 +++--
+ main.c    |  2 +-
+ x.c       | 17 ++++++++++++++---
+ 5 files changed, 24 insertions(+), 10 deletions(-)
+
+diff --git a/default.c b/default.c
+index caf7b2e..0984ac8 100644
+--- a/default.c
++++ b/default.c
+@@ -2089,6 +2089,7 @@ int force_g = 0;
+ unsigned char ggr_drv[MAX_STR_LEN] = "";
+ unsigned char ggr_mode[MAX_STR_LEN] = "";
+ unsigned char ggr_display[MAX_STR_LEN] = "";
++unsigned char ggr_window[MAX_STR_LEN] = "";
+ 
+ int anonymous = 0;
+ 
+@@ -2237,6 +2238,7 @@ static struct option links_options[] = {
+ 	{1, setstr_cmd, NULL, NULL, 0, MAX_STR_LEN, default_target, NULL, "target"},
+ 	{1, setstr_cmd, NULL, NULL, 0, MAX_STR_LEN, ggr_mode, NULL, "mode"},
+ 	{1, setstr_cmd, NULL, NULL, 0, MAX_STR_LEN, ggr_display, NULL, "display"},
++	{1, setstr_cmd, NULL, NULL, 0, MAX_STR_LEN, ggr_window, NULL, "window"},
+ 	{1, gen_cmd, num_rd, NULL, 0, MAXINT, &base_session, NULL, "base-session"},
+ 	{1, set_cmd, NULL, NULL, 0, 0, &force_html, NULL, "force-html"},
+ 	{1, dump_cmd, NULL, NULL, D_SOURCE, 0, NULL, NULL, "source"},
+diff --git a/drivers.c b/drivers.c
+index ee86df1..429d80e 100644
+--- a/drivers.c
++++ b/drivers.c
+@@ -105,7 +105,7 @@ static unsigned char *list_graphics_drivers(void)
+  * ukoncenim grafickeho driveru se nastavi default_driver_param podle
+  * drv->get_driver_param.
+  */
+-static unsigned char *init_graphics_driver(struct graphics_driver *gd, unsigned char *param, unsigned char *display)
++static unsigned char *init_graphics_driver(struct graphics_driver *gd, unsigned char *param, unsigned char *display, unsigned char *window)
+ {
+ 	unsigned char *r;
+ 	unsigned char *p = param;
+@@ -113,7 +113,7 @@ static unsigned char *init_graphics_driver(struct graphics_driver *gd, unsigned
+ 	if (!param || !*param) p = dp->param;
+ 	gd->param = dp;
+ 	drv = gd;
+-	r = gd->init_driver(p,display);
++	r = gd->init_driver(p,display,window);
+ 	if (r) drv = NULL;
+ 	else F = 1;
+ 	return r;
+@@ -129,7 +129,7 @@ void add_graphics_drivers(unsigned char **s, int *l)
+ 	}
+ }
+ 
+-unsigned char *init_graphics(unsigned char *driver, unsigned char *param, unsigned char *display)
++unsigned char *init_graphics(unsigned char *driver, unsigned char *param, unsigned char *display, unsigned char *window)
+ {
+ 	unsigned char *s = init_str();
+ 	int l = 0;
+@@ -150,7 +150,7 @@ unsigned char *init_graphics(unsigned char *driver, unsigned char *param, unsign
+ 		if (!driver || !*driver || !casestrcmp((*gd)->name, driver)) {
+ 			unsigned char *r;
+ 			if ((!driver || !*driver) && (*gd)->flags & GD_NOAUTO) continue;
+-			if (!(r = init_graphics_driver(*gd, param, display))) {
++			if (!(r = init_graphics_driver(*gd, param, display, window))) {
+ 				mem_free(s);
+ 				return NULL;
+ 			}
+diff --git a/links.h b/links.h
+index 3a29a08..afc2c8e 100644
+--- a/links.h
++++ b/links.h
+@@ -1920,7 +1920,7 @@ struct driver_param;
+ 
+ struct graphics_driver {
+ 	unsigned char *name;
+-	unsigned char *(*init_driver)(unsigned char *param, unsigned char *display);	/* param is get from get_driver_param and saved into configure file */
++	unsigned char *(*init_driver)(unsigned char *param, unsigned char *display, unsigned char *window);	/* param is get from get_driver_param and saved into configure file */
+ 
+ 	/* Creates new device and returns pointer to it */
+ 	struct graphics_device *(*init_device)(void);
+@@ -2074,7 +2074,7 @@ extern struct graphics_driver *drv;
+ 	if (y1 >= y2) return;				\
+ 
+ void add_graphics_drivers(unsigned char **s, int *l);
+-unsigned char *init_graphics(unsigned char *, unsigned char *, unsigned char *);
++unsigned char *init_graphics(unsigned char *, unsigned char *, unsigned char *, unsigned char *);
+ void shutdown_graphics(void);
+ void update_driver_param(void);
+ int g_kbd_codepage(struct graphics_driver *drv);
+@@ -4885,6 +4885,7 @@ extern int force_g;
+ extern unsigned char ggr_drv[MAX_STR_LEN];
+ extern unsigned char ggr_mode[MAX_STR_LEN];
+ extern unsigned char ggr_display[MAX_STR_LEN];
++extern unsigned char ggr_window[MAX_STR_LEN];
+ 
+ extern unsigned char default_target[MAX_STR_LEN];
+ 
+diff --git a/main.c b/main.c
+index bb51594..b5f500d 100644
+--- a/main.c
++++ b/main.c
+@@ -393,7 +393,7 @@ static void init(void)
+ #ifdef G
+ 			{
+ 				unsigned char *r;
+-				if ((r = init_graphics(ggr_drv, ggr_mode, ggr_display))) {
++				if ((r = init_graphics(ggr_drv, ggr_mode, ggr_display, ggr_window))) {
+ 					fprintf(stderr, "%s", r);
+ 					mem_free(r);
+ 					retval = RET_SYNTAX;
+diff --git a/x.c b/x.c
+index 2feeb03..7e8c20b 100644
+--- a/x.c
++++ b/x.c
+@@ -1597,7 +1597,7 @@ static XIC x_open_xic(Window w);
+ #endif
+ 
+ /* initiate connection with X server */
+-static unsigned char *x_init_driver(unsigned char *param, unsigned char *display)
++static unsigned char *x_init_driver(unsigned char *param, unsigned char *display, unsigned char *window)
+ {
+ 	unsigned char *err;
+ 	int l;
+@@ -1614,7 +1614,7 @@ static unsigned char *x_init_driver(unsigned char *param, unsigned char *display
+ #ifdef X_DEBUG
+ 	{
+ 		char txt[256];
+-		sprintf(txt,"x_init_driver(%s, %s)\n", param, display);
++		sprintf(txt,"x_init_driver(%s, %s, %s)\n", param, display, window);
+ 		MESSAGE(txt);
+ 	}
+ #endif
+@@ -1627,6 +1627,7 @@ static unsigned char *x_init_driver(unsigned char *param, unsigned char *display
+ 	}
+ #endif
+ 	if (!display || !(*display)) display = NULL;
++	if (!window || !(*window)) window = NULL;
+ 
+ /*
+ 	X documentation says on XOpenDisplay(display_name) :
+@@ -1672,9 +1673,15 @@ static unsigned char *x_init_driver(unsigned char *param, unsigned char *display
+ 	x_screen = DefaultScreen(x_display);
+ 	x_display_height = DisplayHeight(x_display, x_screen);
+ 	x_display_width = DisplayWidth(x_display, x_screen);
+-	x_root_window = RootWindow(x_display, x_screen);
+ 	x_default_colormap = XDefaultColormap(x_display, x_screen);
+ 
++	if (window) {
++		x_root_window = strtol(window, NULL, 0);
++	} else {
++		x_root_window = RootWindow(x_display, x_screen);
++	}
++
++
+ 	x_default_window_width = x_display_width;
+ 	if (x_default_window_width >= 100)
+ 		x_default_window_width -= 50;
+@@ -1888,6 +1895,9 @@ visual_found:
+ skip_wm_name:
+ #endif
+ 
++	if (window) {
++		fake_window = x_root_window;
++	} else {
+ 	fake_window = XCreateWindow(
+ 		x_display,
+ 		x_root_window,
+@@ -1904,6 +1914,7 @@ skip_wm_name:
+ 	);
+ 
+ 	fake_window_initialized = 1;
++	}
+ 
+ 	x_normal_gc = XCreateGC(x_display, fake_window, GCFillStyle|GCBackground, &gcv);
+ 	if (!x_normal_gc) {
+-- 
+2.47.0
+

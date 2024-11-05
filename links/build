@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+patch -p1 < 0001-add-XEmbed-support.patch
+
 ./configure \
     --prefix=/usr \
     --mandir=/usr/share/man \
