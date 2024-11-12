@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+make linux
+make \
+    DESTDIR="$1" \
+    LUAPATH="$(pkgconf --variable=INSTALL_LMOD lua)" \
+    LUACPATH="$(pkgconf --variable=INSTALL_CMOD lua)" \
+    install
+
