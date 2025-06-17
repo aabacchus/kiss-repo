@@ -1,11 +1,14 @@
 #!/bin/sh -e
 
+CFLAGS="$CFLAGS $(pkg-config --cflags libbsd-overlay)" \
 ./configure \
+    --without-web \
+    LDFLAGS="$LDFLAGS $(pkg-config --libs libbsd-overlay)" \
     PREFIX=/usr \
     MANDIR=/usr/share/man \
     BACKEND=alsa
 
-make
+make -j1
 make DESTDIR="$1" install
 
 chmod u+w "$1/usr/bin/amused" "$1/usr/share/man/man1/amused.1"
