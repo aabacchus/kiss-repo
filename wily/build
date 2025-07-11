@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+patch -p1 < 0001-fixes.patch
+
+./configure
+
+make
+
+mkdir -p "$1/usr/bin/"
+cp wily/wily "$1/usr/bin/"
+
+mkdir -p "$1/usr/share/doc/wily/"
+cp -R Doc/. "$1/usr/share/doc/wily/"
