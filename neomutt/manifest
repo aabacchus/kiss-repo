@@ -13,6 +13,7 @@
 /usr/share/neomutt/vim-keys/vim-keys.rc
 /usr/share/neomutt/vim-keys/README.md
 /usr/share/neomutt/vim-keys/
+/usr/share/neomutt/smime.rc
 /usr/share/neomutt/oauth2/mutt_oauth2.py
 /usr/share/neomutt/oauth2/README.md
 /usr/share/neomutt/oauth2/
@@ -21,11 +22,14 @@
 /usr/share/man/man5/mmdf.5
 /usr/share/man/man5/mbox.5
 /usr/share/man/man5/
-/usr/share/man/man1/smime_keys.1
+/usr/share/man/man1/smime_keys_neomutt.1
 /usr/share/man/man1/pgpewrap.1
 /usr/share/man/man1/neomutt.1
 /usr/share/man/man1/
 /usr/share/man/
+/usr/share/doc/neomutt/smime-notes.txt
+/usr/share/doc/neomutt/
+/usr/share/doc/
 /usr/share/
 /usr/libexec/neomutt/smime_keys
 /usr/libexec/neomutt/pgpewrap
